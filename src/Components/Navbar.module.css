@@ -11,13 +11,13 @@
 
 .nav2 a:hover{
   border-radius: 10px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.437);
   color: white;
 }
 
 .nav1:hover{
   border-radius: 7px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.437);
   color: white;
 }
 
