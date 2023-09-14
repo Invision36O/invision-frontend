@@ -1,10 +1,13 @@
 import React from 'react'
+import Navbar from './Navbar'
+import './ImportModel.css'
 
 export default function () {
   return (
-    <div>
-        Hello
-    </div>
+    <>
+        {/* <Navbar/> */}
+        <h1 className='hello'>Hello</h1>
+    </>
   )
 }
 
