@@ -1,15 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import styles from './App.module.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Homepage from './Components/Homepage'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
+    <div className = {styles.App}>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage/>}/>
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }

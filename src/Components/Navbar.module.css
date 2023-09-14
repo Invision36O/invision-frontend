@@ -1,0 +1,33 @@
+.navbarr {
+  width: 100%;
+  background-color: #fff;
+}
+
+.nav1, .nav2 {
+  display: inline-block;
+  text-decoration: none;
+
+}
+
+.nav2 a:hover{
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+}
+
+.nav1:hover{
+  border-radius: 7px;
+  background-color: black;
+  color: white;
+}
+
+.nav1 {
+  float: left;
+  margin: 20px;
+  padding: 7px;
+}
+
+.nav2 {
+  float: right;
+  margin-right: 65px;
+}
