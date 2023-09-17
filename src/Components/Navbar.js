@@ -1,17 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
+import logo from "../Logo/applogo.png"
 import './Navbar.css'
+import{Link} from 'react-router-dom'
 
 export default function(){
+    const [click,setClick]=useState(false);
     return(
     <>
-        <nav className='navbarr'>
-            <div className='flex'>
-              <div>  <a className='nav1' href="">Home</a>
-                <a className='nav1' href="">Features</a>
-                <a className='nav1' href="">How to use</a>
-                <a className='nav1' href="/importmodel">Import Model</a> </div>
-                <div className='right'><a className='nav1' href="">Login</a></div>
-            </div>
+        <nav className="navbar">
+
+            <div className='menu-items'>
+            
+               <ul>
+               <img className="applogo" src={logo} width={300} height={54}></img>
+                <li><a href="/">Home</a></li>
+                <li><a href="/Login">Features</a></li>
+               </ul>
+             </div>
+
         </nav>
     </>
     )
