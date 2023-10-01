@@ -1,0 +1,51 @@
+
+button{
+    margin: 5px;
+    padding: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: rgba(128, 255, 0, 0.556);
+    border: solid 1px;
+    box-shadow: 2px 1.5px 1px ;
+    border-radius: 2px;
+    font-size: medium;
+    font-weight: 400;
+    scale: 70%;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.modelview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+button:hover{
+    scale: 73%;
+    box-shadow: 3.5px 3px 2px;
+}
+
+.import-btn{
+    margin: 5px;
+    padding: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: rgba(128, 255, 0, 0.556);
+    border: solid 1px;
+    box-shadow: 2px 1.5px 1px ;
+    border-radius: 2px;
+    font-size: medium;
+    font-weight: 400;
+    scale: 100%;
+}
+.import-btn:hover{
+    scale: 101%;
+    box-shadow: 3.5px 3px 2px;
+}
