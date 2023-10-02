@@ -6,9 +6,9 @@ import './App.css'
 function App() {
   return (
     <div className="App">
-      {/* <Homepage/> */}
+      <Homepage/>
       <div className='modelview'>
-        <ModelView/>
+        {/* <ModelView/> */}
         
       </div>
     </div>
