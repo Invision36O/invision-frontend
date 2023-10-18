@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       {/* <Homepage/> */}
       <div className='modelview'>
-        {/* <ModelView/> */}
+    
       </div>
       <Maps/>
     </div>
