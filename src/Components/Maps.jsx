@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import './Maps.css'
 
 function Maps() {
   const [image, setImage] = useState(null);
@@ -35,8 +36,22 @@ function Maps() {
   };
 
   return (
-    <div>
-      {imagepath && <img src={imagepath} alt="Processed Image" />}
+    <div className="container">
+      <div className="header">
+        <h1>INVISION360</h1>
+      </div>
+      <div className="image-display-section">
+        <div className="upload-section">
+          <form onSubmit={submitImage}>
+            <h2>Upload Floor Plan</h2>
+            <input type="file" accept="image/*" onChange={onInputChange} />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+        <div className="image-display">
+          {imagepath && <img src={imagepath} alt="Processed Image" />}
+        </div>
+      </div>
       <ul>
         {roomData.map((room, index) => (
           <li key={index}>
@@ -45,13 +60,9 @@ function Maps() {
         ))}
       </ul>
 
-      <form onSubmit={submitImage}>
-        <h2>Upload Floor Plan</h2>
-        <input type="file" accept="image/*" onChange={onInputChange} />
-        <button type="submit">Submit</button>
-      </form>
     </div>
   );
+  
 }
 
 export default Maps;
