@@ -1,6 +1,7 @@
 import React from 'react';
 import ModelView from './Components/ModelView';
 import Homepage from './Components/Homepage'
+import Space from './Components/Space'
 import Maps from './Components/Maps'
 import {Routes, BrowserRouter, Route} from 'react-router-dom'
 import FeatureSelection from './Components/FeatureSelection'
@@ -10,19 +11,13 @@ import { LandingPage } from './Components/LandingPage';
 function App() {
   return (
     <div className="App">
+    
+    {<Maps/>}
+
+  {/* <Space/> */}
       
-      {/* <div className='modelview'>
-    <ModelView/>
-      </div> */}
       
-      <BrowserRouter>
-    <Routes>
-      {/* <Route path="/home" element={<Homepage/>}/>  */}
-      <Route path="/" element={<FeatureSelection/>} />
-      <Route path="/map" element={<Maps/>} />
-      <Route path="/model" element={<ModelView/>} />
-    </Routes>
-  </BrowserRouter>
+      
     </div>
   );
 }
