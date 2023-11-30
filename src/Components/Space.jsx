@@ -7,7 +7,6 @@ export default function ModelView() {
   const containerRef = useRef(null);
   const [roomData, setRoomData] = useState(null);
 
-  // Fetch the JSON data from the backend
   useEffect(() => {
     const fetchData = async () => {
       try {
