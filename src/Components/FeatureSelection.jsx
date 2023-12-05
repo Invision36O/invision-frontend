@@ -15,8 +15,8 @@ function FeatureSelection() {
                     <div className="rectangle-55" />
                     <div className="rectangle-6" />
                     <img className="screenshot frontElevation" alt="Screenshot" src="/Icons/Screenshot 2023-10-12 122032 1.png" />
-                    <a href="/model"><img className="screenshot-2 object" alt="Screenshot" src="/Icons/Screenshot 2023-10-12 122520 1.png" /></a>
-                    <a href="/map"><img className="floor-plan-with" alt="Floor plan with" src="/Icons/floor-plan-with-furniture-blueprint-illustration-removebg-preview 1.png"/></a>
+                    <a href="/ModelView"><img className="screenshot-2 object" alt="Screenshot" src="/Icons/Screenshot 2023-10-12 122520 1.png" /></a>
+                    <a href="/Maps"><img className="floor-plan-with" alt="Floor plan with" src="/Icons/floor-plan-with-furniture-blueprint-illustration-removebg-preview 1.png"/></a>
                     <div className="rectangle-7" />
                     <div className="rectangle-8" />
                     <img className="whatsapp-image conversion" alt="Whatsapp image" src="/Icons/WhatsApp_Image_2023-10-07_at_4.47 2.png" />

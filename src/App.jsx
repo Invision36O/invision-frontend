@@ -11,13 +11,16 @@ import { LandingPage } from './Components/LandingPage';
 function App() {
   return (
     <div className="App">
-    
-    {/* {<Maps/>} */}
-
-  <Space/>
-      
-      
-      
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage/>}/>
+          <Route path="/Features" element={<FeatureSelection/>}/>
+          <Route path="/Maps" element = {<Maps/>}/>
+          <Route path="/Space" element = {<Space/>}/>
+          <Route path="/ModelView" element = {<ModelView/>}/>
+          <Route path="/Home" element = {<Homepage/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

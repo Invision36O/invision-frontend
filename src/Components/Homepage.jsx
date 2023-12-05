@@ -9,7 +9,7 @@ function Homepage  ()  {
           <div className="rectangle" />
           <p className="features">
             <span className="text-wrapper">&nbsp;</span>
-            <span className="span">Features</span>
+           <a href="/Features"><span className="span">Features</span></a>
           </p>
           <div className="group">
             <div className="overlap-group">
@@ -36,11 +36,12 @@ function Homepage  ()  {
           <img className="element" alt="Element" src="2916611-1.png" />
           <div className="rectangle-5" />
           <div className="features-2"> Features</div>
-          <img className="screenshot" alt="Screenshot" src="screenshot-2023-10-12-103514-removebg-preview-1.png" />
+          <img className="screenshot" alt="Screenshot" src="/Icons/Screenshot_2023-10-12_134932-removebg-preview 1.png" />
+          
         </div>
         <div className="overlap-2">
           <div className="nav">
-            <img className="whatsapp-image" alt="Whatsapp image" src="whatsapp-image-2023-10-07-at-4-47-1.png" />
+            <img className="whatsapp-image" alt="Whatsapp image" src="/Icons/WhatsApp_Image_2023-10-07_at_4.47 2.png"/>
             <div className="menu">
               <div className="text-wrapper-5">Features</div>
               <div className="text-wrapper-6">About</div>
@@ -59,7 +60,7 @@ function Homepage  ()  {
           />
           <button className="button">
             <div className="overlap-3">
-              <div className="text-wrapper-7">Get Started</div>
+              <a href="/Features"><div className="text-wrapper-7">Get Started</div></a>
             </div>
           </button>
         </div>
@@ -93,7 +94,7 @@ function Homepage  ()  {
           </div>
           <input
             className="email"
-            placeholder="Email: Invision360@gmail.com&lt;br/&gt;LinkedIn: Invision360"
+            placeholder="Email: invision360@gmail.com&lt;br/&gt;LinkedIn: Invision360"
             type="email"
           />
         </div>
