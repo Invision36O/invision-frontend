@@ -5,7 +5,6 @@ import './Maps.css'
 function Maps() {
   const [image, setImage] = useState(null);
   const [imagepath, setImagepath] = useState(null);
-  const [roomData, setRoomData] = useState([]);
 
   const submitImage = async (e) => {
     e.preventDefault();
@@ -22,10 +21,9 @@ function Maps() {
         }
       );
       console.log("Response: ", response);
-      const processedImagePath = "http://localhost:3001/public/" + response.data.imagename;
+      const processedImagePath = "http://localhost:3001/public/processedImages/" + response.data.imagename;
+      console.log(processedImagePath);
       setImagepath(processedImagePath);
-      setRoomData(response.data.roomData);
-      console.log("Response Room Data: ", response.data.roomData);
     } catch (error) {
       console.error(error);
     }
@@ -52,13 +50,6 @@ function Maps() {
           {imagepath && <img src={imagepath} alt="Processed Image" />}
         </div>
       </div>
-      <ul>
-        {roomData.map((room, index) => (
-          <li key={index}>
-            {room.name}: Width: {room.dimensions.width}, Height: {room.dimensions.height}
-          </li>
-        ))}
-      </ul>
 
     </div>
   );

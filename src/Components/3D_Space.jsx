@@ -12,7 +12,7 @@ export default function ModelView() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/getData');
+        const response = await fetch('http://localhost:3001/space/getData');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -104,7 +104,7 @@ export default function ModelView() {
 
     // Define brick material here
     const brickTexture = new THREE.TextureLoader().load('/assets/brick_wall_006_diff_4k.jpg');
-    const brickMaterial = new THREE.MeshPhongMaterial({ map: brickTexture });
+    const brickMaterial = new THREE.MeshPhongMaterial({ map: brickTexture, side: THREE.DoubleSide });
 
     // Loop through each room to create the floor and walls
     Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
@@ -130,7 +130,8 @@ export default function ModelView() {
 
       // Front and back walls
       const frontWallGeometry = new THREE.PlaneGeometry(roomDetails.dimensions.width, wallHeight);
-      const frontWall = new THREE.Mesh(frontWallGeometry, brickMaterial);
+      const frontWallMaterial = new THREE.MeshPhongMaterial({ map: brickTexture, side: THREE.DoubleSide });
+      const frontWall = new THREE.Mesh(frontWallGeometry, frontWallMaterial);
       frontWall.position.set(
         roomDetails.position.x + roomDetails.dimensions.width / 2,
         wallHeight / 2,
@@ -138,7 +139,8 @@ export default function ModelView() {
       );
       scene.add(frontWall);
 
-      const backWall = new THREE.Mesh(frontWallGeometry, brickMaterial);
+      const backWallMaterial = new THREE.MeshPhongMaterial({ map: brickTexture, side: THREE.DoubleSide });
+      const backWall = new THREE.Mesh(frontWallGeometry, backWallMaterial);
       backWall.position.set(
         roomDetails.position.x + roomDetails.dimensions.width / 2,
         wallHeight / 2,
@@ -148,7 +150,8 @@ export default function ModelView() {
 
       // Side walls
       const sideWallGeometry = new THREE.PlaneGeometry(roomDetails.dimensions.depth, wallHeight);
-      const leftWall = new THREE.Mesh(sideWallGeometry, brickMaterial);
+      const leftWallMaterial = new THREE.MeshPhongMaterial({ map: brickTexture, side: THREE.DoubleSide });
+      const leftWall = new THREE.Mesh(sideWallGeometry, leftWallMaterial);
       leftWall.position.set(
         roomDetails.position.x,
         wallHeight / 2,
@@ -157,7 +160,8 @@ export default function ModelView() {
       leftWall.rotation.y = Math.PI / 2;
       scene.add(leftWall);
 
-      const rightWall = new THREE.Mesh(sideWallGeometry, brickMaterial);
+      const rightWallMaterial = new THREE.MeshPhongMaterial({ map: brickTexture, side: THREE.DoubleSide });
+      const rightWall = new THREE.Mesh(sideWallGeometry, rightWallMaterial);
       rightWall.position.set(
         roomDetails.position.x + roomDetails.dimensions.width,
         wallHeight / 2,
