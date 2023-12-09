@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import './Space.css'; 
-import { TextureLoader } from 'three';
-
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import './Space.css';
 
 export default function ModelView() {
   const [roomData, setRoomData] = useState(null);
   const containerRef = useRef(null);
+  const loadedModel = null; // Assuming you have loaded a model using Three.js, update as needed
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,11 +18,12 @@ export default function ModelView() {
         }
         const data = await response.json();
         setRoomData(data);
+        console.log(data);
       } catch (error) {
-        console.error("Could not fetch room data:", error);
+        console.error('Could not fetch room data:', error);
       }
     };
-    
+
     fetchData();
   }, []);
 
@@ -64,11 +65,47 @@ export default function ModelView() {
     directionalLight.position.set(0, 1, 1).normalize();
     scene.add(directionalLight);
 
-    // Load textures for the wall and the floor
+    // Load HDR environment map
+    const loader = new RGBELoader();
+    loader.setDataType(THREE.FloatType);
+    loader.load(
+      '../assets/environment/kloofendal_misty_morning_puresky_2k.hdr',
+      (texture) => {
+        const envSphere = new THREE.Mesh(
+          new THREE.SphereGeometry(100, 32, 32),
+          new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide })
+        );
+        scene.add(envSphere);
+
+        const animate = () => {
+          requestAnimationFrame(animate);
+
+          if (loadedModel && loadedModel.scene) {
+            loadedModel.scene.rotation.x += 0.00;
+            loadedModel.scene.rotation.y += 0.00;
+            loadedModel.scene.rotation.z += 0.00;
+
+            envSphere.rotation.copy(loadedModel.scene.rotation);
+            envSphere.position.copy(loadedModel.scene.position);
+          }
+
+          controls.update();
+          renderer.render(scene, camera);
+        };
+
+        animate();
+      },
+      undefined,
+      (error) => {
+        console.error('Error loading HDR environment map:', error);
+        scene.background = new THREE.Color(0xabcdef);
+      }
+    );
+
+    // Define brick material here
     const brickTexture = new THREE.TextureLoader().load('/assets/brick_wall_006_diff_4k.jpg');
-    // Replace with the path to your brick texture image
     const brickMaterial = new THREE.MeshPhongMaterial({ map: brickTexture });
-    
+
     // Loop through each room to create the floor and walls
     Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
       // Floor creation
@@ -83,6 +120,9 @@ export default function ModelView() {
         roomDetails.position.z + roomDetails.dimensions.depth / 2
       );
       scene.add(floor);
+
+      const axesHelper = new THREE.AxesHelper(2);
+      scene.add(axesHelper);
 
       // Walls creation
       const wallThickness = 0.1;
@@ -156,8 +196,12 @@ export default function ModelView() {
   }, [roomData]);
 
   return (
-    <div className='view'>
-      <div className='container' ref={containerRef} style={{ width: '800px', height: '620px', border: '3px solid', boxShadow: '5px 5px 4px' }}/>
+    <div className="view">
+      <div
+        className="container"
+        ref={containerRef}
+        style={{ width: '800px', height: '620px', border: '3px solid', boxShadow: '5px 5px 4px' }}
+      />
     </div>
   );
 }
