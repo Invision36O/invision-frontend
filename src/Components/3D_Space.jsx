@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import './Space.css';
+import './Space.css'; 
+import { TextureLoader } from 'three';
+
 
 export default function ModelView() {
   const [roomData, setRoomData] = useState(null);
@@ -20,55 +22,41 @@ export default function ModelView() {
         console.error("Could not fetch room data:", error);
       }
     };
-
+    
     fetchData();
   }, []);
 
-  function createTextSprite(text) {
+  function createTextSprite(text, color = '#FFF') {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     context.font = '24px Arial';
-    context.fillStyle = 'rgba(255, 255, 255, 1)';
+    context.fillStyle = color;
     context.fillText(text, 50, 50);
-  
     const texture = new THREE.CanvasTexture(canvas);
     const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
     const sprite = new THREE.Sprite(spriteMaterial);
     sprite.scale.set(10, 5, 1);
-  
     return sprite;
   }
-
-  
-  
 
   useEffect(() => {
     if (!roomData) return;
 
     const container = containerRef.current;
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000); // Set a dark background
+    scene.background = new THREE.Color(0x000000); // Dark background for better visibility
 
     const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
-    camera.position.set(0, 50, 50); // Adjusted camera position for better view
+    camera.position.set(0, 50, 50);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setClearColor(0x000000); // Set clear color to black
     renderer.setSize(container.offsetWidth, container.offsetHeight);
     container.appendChild(renderer.domElement);
 
-    new OrbitControls(camera, renderer.domElement);
+    const controls = new OrbitControls(camera, renderer.domElement);
 
-    // Add an AxesHelper to visualize the axes
-    const axesHelper = new THREE.AxesHelper(50);
-    scene.add(axesHelper);
-
-    // Add a GridHelper to visualize the grid on the floor
-    const gridHelper = new THREE.GridHelper(100, 100);
-    scene.add(gridHelper);
-
-    // Lighting
+    // Lighting setup
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
@@ -76,50 +64,86 @@ export default function ModelView() {
     directionalLight.position.set(0, 1, 1).normalize();
     scene.add(directionalLight);
 
-    // Random color function
-    const getRandomColor = () => {
-      const letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    };
-
-    // Create room meshes based on the new data format
-    // Assuming roomData is in the correct format with position being the bottom-left corner of each room
-    Object.entries(roomData.rooms).forEach(([name, { dimensions, position }]) => {
-      const geometry = new THREE.BoxGeometry(dimensions.width, dimensions.height, dimensions.depth);
-      const material = new THREE.MeshPhongMaterial({ color: getRandomColor() });
-      const roomMesh = new THREE.Mesh(geometry, material);
+    // Load textures for the wall and the floor
+    const brickTexture = new THREE.TextureLoader().load('/assets/brick_wall_006_diff_4k.jpg');
+    // Replace with the path to your brick texture image
+    const brickMaterial = new THREE.MeshPhongMaterial({ map: brickTexture });
     
-      const halfWidth = dimensions.width / 2;
-      const halfDepth = dimensions.depth / 2;
-      roomMesh.position.set(position.x + halfWidth, dimensions.height / 2, position.z + halfDepth);
-      
-      console.log(`${name} position: `, roomMesh.position); // Log to debug
-      
-      scene.add(roomMesh);
+    // Loop through each room to create the floor and walls
+    Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
+      // Floor creation
+      const floorColor = new THREE.Color('grey'); // Grey color for the floor
+      const floorGeometry = new THREE.PlaneGeometry(roomDetails.dimensions.width, roomDetails.dimensions.depth);
+      const floorMaterial = new THREE.MeshPhongMaterial({ color: floorColor, side: THREE.DoubleSide });
+      const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+      floor.rotation.x = -Math.PI / 2; // Rotate to lie flat
+      floor.position.set(
+        roomDetails.position.x + roomDetails.dimensions.width / 2,
+        0,
+        roomDetails.position.z + roomDetails.dimensions.depth / 2
+      );
+      scene.add(floor);
 
-      const label = createTextSprite(name);
+      // Walls creation
+      const wallThickness = 0.1;
+      const wallHeight = roomDetails.dimensions.height;
+
+      // Front and back walls
+      const frontWallGeometry = new THREE.PlaneGeometry(roomDetails.dimensions.width, wallHeight);
+      const frontWall = new THREE.Mesh(frontWallGeometry, brickMaterial);
+      frontWall.position.set(
+        roomDetails.position.x + roomDetails.dimensions.width / 2,
+        wallHeight / 2,
+        roomDetails.position.z
+      );
+      scene.add(frontWall);
+
+      const backWall = new THREE.Mesh(frontWallGeometry, brickMaterial);
+      backWall.position.set(
+        roomDetails.position.x + roomDetails.dimensions.width / 2,
+        wallHeight / 2,
+        roomDetails.position.z + roomDetails.dimensions.depth
+      );
+      scene.add(backWall);
+
+      // Side walls
+      const sideWallGeometry = new THREE.PlaneGeometry(roomDetails.dimensions.depth, wallHeight);
+      const leftWall = new THREE.Mesh(sideWallGeometry, brickMaterial);
+      leftWall.position.set(
+        roomDetails.position.x,
+        wallHeight / 2,
+        roomDetails.position.z + roomDetails.dimensions.depth / 2
+      );
+      leftWall.rotation.y = Math.PI / 2;
+      scene.add(leftWall);
+
+      const rightWall = new THREE.Mesh(sideWallGeometry, brickMaterial);
+      rightWall.position.set(
+        roomDetails.position.x + roomDetails.dimensions.width,
+        wallHeight / 2,
+        roomDetails.position.z + roomDetails.dimensions.depth / 2
+      );
+      rightWall.rotation.y = Math.PI / 2;
+      scene.add(rightWall);
+
+      // Room label
+      const label = createTextSprite(roomName);
       label.position.set(
-        position.x + halfWidth, // x position
-        dimensions.height + 1,  // slightly above the room mesh
-        position.z + halfDepth  // z position
+        roomDetails.position.x + roomDetails.dimensions.width / 2,
+        wallHeight + 1,
+        roomDetails.position.z + roomDetails.dimensions.depth / 2
       );
       scene.add(label);
     });
-    
 
-    // Render loop
     const animate = () => {
       requestAnimationFrame(animate);
+      controls.update();
       renderer.render(scene, camera);
     };
 
     animate();
 
-    // Resize handler
     const handleResize = () => {
       camera.aspect = container.offsetWidth / container.offsetHeight;
       camera.updateProjectionMatrix();
@@ -128,9 +152,7 @@ export default function ModelView() {
 
     window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, [roomData]);
 
   return (
