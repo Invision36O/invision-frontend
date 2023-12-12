@@ -103,11 +103,22 @@ export default function ModelView() {
     );
 
     // Define brick material here
-    const brickTexture = new THREE.TextureLoader().load('/assets/brick_wall_006_diff_4k.jpg');
+    const brickTexture = new THREE.TextureLoader().load('/assets/patterned_brick_wall_02_diff_4k.jpg');
     const brickMaterial = new THREE.MeshPhongMaterial({ map: brickTexture, side: THREE.DoubleSide });
 
-    // Loop through each room to create the floor and walls
+    // Load wood door texture
+    const woodDoorTexture = new THREE.TextureLoader().load('/assets/door.jpg');
+      const woodDoorMaterial = new THREE.MeshPhongMaterial({
+      map: woodDoorTexture,
+      // bumpMap: woodDoorBumpMap,
+      // bumpScale: 0.05, // Adjust the scale for the right effect
+      side: THREE.DoubleSide
+    });
+
+ 
+    // Loop through each room to create the floor, walls, and doors
     Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
+      console.log('Room Details:', roomData.rooms.Terrace);
       // Floor creation
       const floorColor = new THREE.Color('grey'); // Grey color for the floor
       const floorGeometry = new THREE.PlaneGeometry(roomDetails.dimensions.width, roomDetails.dimensions.depth);
@@ -120,9 +131,6 @@ export default function ModelView() {
         roomDetails.position.z + roomDetails.dimensions.depth / 2
       );
       scene.add(floor);
-
-      const axesHelper = new THREE.AxesHelper(2);
-      scene.add(axesHelper);
 
       // Walls creation
       const wallThickness = 0.1;
@@ -170,6 +178,57 @@ export default function ModelView() {
       rightWall.rotation.y = Math.PI / 2;
       scene.add(rightWall);
 
+// Doors creation
+const doorWidth = 0.5; // Adjusted door width
+const doorHeight = 1; // Adjusted door height
+const doorThickness = 0.01; // Adjusted door thickness
+
+const doorConfigurations = {
+  // Terrace: {
+  //   position: new THREE.Vector3(
+  //     roomDetails.position.x + roomDetails.dimensions.width,
+  //     doorHeight / 2,
+  //     roomDetails.position.z + roomDetails.dimensions.depth / 2
+  //   ),
+  //   rotation: Math.PI / 2,
+  //   material: woodDoorMaterial,
+  // },
+  Hallway: {
+    position: new THREE.Vector3(
+      roomDetails.position.x + roomDetails.dimensions.width / 2,
+      doorHeight / 2,
+      roomDetails.position.z + roomDetails.dimensions.depth
+    ),
+    rotation: Math.PI,
+    material: woodDoorMaterial,
+  },
+  
+  
+  // Add more room configurations as needed
+};
+
+// Loop through each room to create the floor, walls, and doors
+Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
+  const doorConfig = doorConfigurations[roomName];
+
+  if (doorConfig) {
+    createDoor(
+      doorConfig.position,
+      doorWidth,
+      doorHeight,
+      doorThickness,
+      doorConfig.rotation,
+      doorConfig.material
+    );
+  }
+
+  // ... (rest of the code remains the same)
+});
+
+
+
+
+
       // Room label
       const label = createTextSprite(roomName);
       label.position.set(
@@ -178,6 +237,22 @@ export default function ModelView() {
         roomDetails.position.z + roomDetails.dimensions.depth / 2
       );
       scene.add(label);
+
+      function createDoor(position, width, height, thickness, rotation, material) {
+        // Adjust the door geometry to consider thickness
+        const doorGeometry = new THREE.BoxGeometry(width, height, thickness);
+      
+        // Adjust the door position to make it attached within the walls
+        position.x += Math.cos(rotation) * (thickness / 2);
+        position.z += Math.sin(rotation) * (thickness / 2);
+      
+        const door = new THREE.Mesh(doorGeometry, material);
+        door.position.copy(position);
+        door.rotation.y = rotation;
+        scene.add(door);
+      }
+      
+     
     });
 
     const animate = () => {
@@ -198,6 +273,8 @@ export default function ModelView() {
 
     return () => window.removeEventListener('resize', handleResize);
   }, [roomData]);
+
+ 
 
   return (
     <div className="view">
