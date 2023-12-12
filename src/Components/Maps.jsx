@@ -60,7 +60,7 @@ function Maps() {
           {imagepath && <img src={imagepath} alt="Processed Image" />}
         </div>
       </div>
-     <a href="/space"><button className='convert-btn'>Convert to 3D</button></a>
+
     </div>
   );
 }

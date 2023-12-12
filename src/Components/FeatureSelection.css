@@ -1,7 +1,7 @@
 .feature-window {
     background-color: #ffffff;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     width: 100%;
 }
@@ -36,7 +36,7 @@
     height: 523px;
     left: 227px;
     position: absolute;
-    top: 350px;
+    top: 240px;
     width: 1362px;
 }
 
@@ -59,7 +59,7 @@
     height: 330px;
     left: 735px;
     position: absolute;
-    top: 455px;
+    top: 340px;
     width: 356px;
 }
 
@@ -72,7 +72,7 @@
     height: 330px;
     left: 306px;
     position: absolute;
-    top: 455px;
+    top: 340px;
     width: 356px;
 }
 
@@ -83,7 +83,7 @@
     height: 330px;
     left: 1166px;
     position: absolute;
-    top: 455px;
+    top: 340px;
     width: 356px;
 }
 
@@ -96,7 +96,7 @@
     height: 255px;
     left: 334px;
     position: absolute;
-    top: 495px;
+    top: 380px;
     width: 299px;
 }
 
@@ -117,7 +117,7 @@
     height: 255px;
     left: 1194px;
     position: absolute;
-    top: 495px;
+    top: 380px;
     width: 299px;
 }
 
@@ -130,7 +130,7 @@
     height: 255px;
     left: 763px;
     position: absolute;
-    top: 495px;
+    top: 380px;
     width: 299px;
 }
 
@@ -139,7 +139,7 @@
     left: 1214px;
     object-fit: cover;
     position: absolute;
-    top: 525px;
+    top: 410px;
     width: 271px;
     scale: 90%;
 }
@@ -148,7 +148,7 @@
     height: 186px;
     left: 806px;
     position: absolute;
-    top: 538px;
+    top: 420px;
     width: 213px;
 }
 
@@ -157,7 +157,7 @@
     left: 306px;
     object-fit: cover;
     position: absolute;
-    top: 495px;
+    top: 375px;
     width: 361px;
     scale: 85%;
 }

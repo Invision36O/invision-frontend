@@ -165,7 +165,7 @@ export default function ModelView() {
   }, [modelURL]);
 
   return (
-    <>
+    <div className='color'>
     <div className='buttons'>
 <input type="file" accept=".gltf,.glb" style={{ display: 'none' }} onChange={handleImageChange} id="modelFileInput" />
 <button className="import-btn" onClick={() => document.getElementById('modelFileInput').click()}>Upload Model</button>
@@ -175,6 +175,6 @@ export default function ModelView() {
 </div>
 
 <div className='container' ref={containerRef} style={{minHeight:'200',minWidth:'300',width: '800px',height: '620px', border: '3px solid', boxShadow:'5px 5px 4px'}}/>
-    </>
+    </div>
   );
 }
