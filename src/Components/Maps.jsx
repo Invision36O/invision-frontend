@@ -1,35 +1,42 @@
-import React, { useState } from 'react';
-import axios from "axios";
-import './Maps.css'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './Maps.css';
 
 function Maps() {
   const [image, setImage] = useState(null);
   const [imagepath, setImagepath] = useState(null);
-  const [roomData, setRoomData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const submitImage = async (e) => {
     e.preventDefault();
+    document.getElementById('loading').innerHTML = "Processing";
+    setLoading(true);
 
     const formData = new FormData();
     formData.append('image', image);
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/map/uploadmap",
+        'http://localhost:3001/map/uploadmap',
         formData,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: { 'Content-Type': 'multipart/form-data' },
         }
       );
-      console.log("Response: ", response);
-      const processedImagePath = "http://localhost:3001/public/" + response.data.imagename;
+      console.log('Response: ', response);
+      const processedImagePath =
+        'http://localhost:3001/public/processedImages/' + response.data.imagename;
+      console.log(processedImagePath);
       setImagepath(processedImagePath);
-      setRoomData(response.data.roomData);
-      console.log("Response Room Data: ", response.data.roomData);
+      document.getElementById('loading').innerHTML = "";
+      setLoading(false);
     } catch (error) {
+      document.getElementById('loading').innerHTML = "Something went wrong while Processing!";
       console.error(error);
+      
+      setLoading(false);
     }
-  }; 
+  };
 
   const onInputChange = (e) => {
     setImage(e.target.files[0]);
@@ -49,20 +56,13 @@ function Maps() {
           </form>
         </div>
         <div className="image-display">
+          <h1 id='loading' className={`loading ${loading ? 'rotating-circle' : ''}`}></h1>
           {imagepath && <img src={imagepath} alt="Processed Image" />}
         </div>
       </div>
-      <ul>
-        {roomData.map((room, index) => (
-          <li key={index}>
-            {room.name}: Width: {room.dimensions.width}, Height: {room.dimensions.height}
-          </li>
-        ))}
-      </ul>
-
+     <a href="/space"><button className='convert-btn'>Convert to 3D</button></a>
     </div>
   );
-  
 }
 
 export default Maps;

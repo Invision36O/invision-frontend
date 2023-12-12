@@ -1,24 +1,24 @@
-import React, {useState} from 'react'
-import logo from "../Logo/applogo.png"
-import './Navbar.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Navbar.css'; // Make sure to create a corresponding CSS file for styling.
 
-export default function(){
-    const [click,setClick]=useState(false);
-    return(
-    <>
-        <nav className="navbar">
+const Navbar = () => {
+  return (
+    <nav className="navbar">
+      <div className="navbar-logo">
+        {/* Add your logo inside the Link */}
+        <Link to="/">
+          <img src="/Icons/logo.png" alt="INVISION360 Logo" />
+        </Link>
+      </div>
+      <div className="navbar-links">
+        <Link to="/">Home</Link>
+        <Link to="/features">Features</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/login">Login/Signup</Link>
+      </div>
+    </nav>
+  );
+};
 
-            <div className='menu-items'>
-            
-               <ul>
-               <img className="applogo" src={logo} width={300} height={54}></img>
-                <li><a href="/">Home</a></li>
-                <li><a href="/Login">Features</a></li>
-               </ul>
-             </div>
-
-        </nav>
-    </>
-    )
-}
-
+export default Navbar;
