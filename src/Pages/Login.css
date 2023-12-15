@@ -1,0 +1,52 @@
+.login-container {
+    background-color: #ffffff;
+    color: #800080;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .login-form {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 380px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px #000000;
+  }
+  
+  .login-heading {
+    color: #800080;
+    text-align: center;
+  }
+  
+  .form-label {
+    display: block;
+    margin: 10px;
+    text-align: left;
+  }
+  
+  .form-button {
+    background-color: #800080;
+    color: #ffffff;
+    padding: 7px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    width: 80%;
+    margin-top: -5px;
+  }
+  
+  .signup {
+    font-size: small;
+  }
+  
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: -35px;
+  }
+ 

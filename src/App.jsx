@@ -7,6 +7,9 @@ import {Routes, BrowserRouter, Route} from 'react-router-dom'
 import FeatureSelection from './Components/FeatureSelection'
 import './App.css'
 import { LandingPage } from './Components/LandingPage';
+import Signup from './Pages/Signup';
+import Login from './Pages/Login';
+import Profile from './Pages/Profile';
 
 function App() {
   return (
@@ -14,11 +17,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage/>}/>
-          <Route path="/Features" element={<FeatureSelection/>}/>
-          <Route path="/Map" element = {<Maps/>}/>
-          <Route path="/Space" element = {<Space/>}/>
-          <Route path="/ModelView" element = {<ModelView/>}/>
-          <Route path="/Home" element = {<Homepage/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/features" element={<FeatureSelection/>}/>
+          <Route path="/map" element = {<Maps/>}/>
+          <Route path="/space" element = {<Space/>}/>
+          <Route path="/modelView" element = {<ModelView/>}/>
+          <Route path="/home" element = {<Homepage/>}/>
         </Routes>
       </BrowserRouter>
     </div>

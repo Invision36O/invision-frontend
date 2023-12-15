@@ -1,12 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css'; // Make sure to create a corresponding CSS file for styling.
+import './Navbar.css';
 
 const Navbar = () => {
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const fetchUserData = async () => {
+        try {
+          const response = await fetch('http://localhost:3001/user/getUser', {
+            headers: {
+              token: token,
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            setUserData(data);
+          } else {
+            const errorData = await response.json();
+            setError(errorData.message);
+          }
+        } catch (error) {
+          setError('An error occurred while fetching user data.');
+        }
+      };
+
+      fetchUserData();
+    }
+  }, []);
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        {/* Add your logo inside the Link */}
         <Link to="/">
           <img src="/Icons/logo.png" alt="INVISION360 Logo" />
         </Link>
@@ -15,7 +46,11 @@ const Navbar = () => {
         <Link to="/">Home</Link>
         <Link to="/features">Features</Link>
         <Link to="/contact">Contact</Link>
-        <Link to="/login">Login/Signup</Link>
+        {userData ? (
+          <Link id='username' to="/profile">{userData.username}</Link>
+        ) : (
+          <Link id='username' to="/login">Login</Link>
+        )}
       </div>
     </nav>
   );
