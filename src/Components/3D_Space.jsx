@@ -7,7 +7,7 @@ import './Space.css';
 export default function ModelView() {
   const [roomData, setRoomData] = useState(null);
   const containerRef = useRef(null);
-  const loadedModel = null; // Assuming you have loaded a model using Three.js, update as needed
+  const loadedModel = null; 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,11 +120,11 @@ export default function ModelView() {
     Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
       console.log('Room Details:', roomData.rooms.Terrace);
       // Floor creation
-      const floorColor = new THREE.Color('grey'); // Grey color for the floor
+      const floorColor = new THREE.Color('grey'); 
       const floorGeometry = new THREE.PlaneGeometry(roomDetails.dimensions.width, roomDetails.dimensions.depth);
       const floorMaterial = new THREE.MeshPhongMaterial({ color: floorColor, side: THREE.DoubleSide });
       const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-      floor.rotation.x = -Math.PI / 2; // Rotate to lie flat
+      floor.rotation.x = -Math.PI / 2; 
       floor.position.set(
         roomDetails.position.x + roomDetails.dimensions.width / 2,
         0,
@@ -179,20 +179,11 @@ export default function ModelView() {
       scene.add(rightWall);
 
 // Doors creation
-const doorWidth = 0.5; // Adjusted door width
-const doorHeight = 1; // Adjusted door height
-const doorThickness = 0.01; // Adjusted door thickness
+const doorWidth = 0.5;
+const doorHeight = 1;
+const doorThickness = 0.01;
 
 const doorConfigurations = {
-  // Terrace: {
-  //   position: new THREE.Vector3(
-  //     roomDetails.position.x + roomDetails.dimensions.width,
-  //     doorHeight / 2,
-  //     roomDetails.position.z + roomDetails.dimensions.depth / 2
-  //   ),
-  //   rotation: Math.PI / 2,
-  //   material: woodDoorMaterial,
-  // },
   Hallway: {
     position: new THREE.Vector3(
       roomDetails.position.x + roomDetails.dimensions.width / 2,
@@ -203,11 +194,8 @@ const doorConfigurations = {
     material: woodDoorMaterial,
   },
   
-  
-  // Add more room configurations as needed
 };
 
-// Loop through each room to create the floor, walls, and doors
 Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
   const doorConfig = doorConfigurations[roomName];
 
@@ -222,14 +210,8 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
     );
   }
 
-  // ... (rest of the code remains the same)
 });
 
-
-
-
-
-      // Room label
       const label = createTextSprite(roomName);
       label.position.set(
         roomDetails.position.x + roomDetails.dimensions.width / 2,
@@ -239,10 +221,8 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
       scene.add(label);
 
       function createDoor(position, width, height, thickness, rotation, material) {
-        // Adjust the door geometry to consider thickness
         const doorGeometry = new THREE.BoxGeometry(width, height, thickness);
       
-        // Adjust the door position to make it attached within the walls
         position.x += Math.cos(rotation) * (thickness / 2);
         position.z += Math.sin(rotation) * (thickness / 2);
       
@@ -283,6 +263,8 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
         ref={containerRef}
         style={{ width: '800px', height: '620px', border: '3px solid', boxShadow: '5px 5px 4px' }}
       />
+
+      <a href="/map"><button>Upload Map</button></a>
     </div>
   );
 }
