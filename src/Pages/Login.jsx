@@ -27,7 +27,10 @@ const Login = () => {
       localStorage.setItem('token', response.data.token);
       navigate('/');
     } catch (err) {
-      console.error('Error logging in:', err.response.data);
+      console.error('Error logging in');
+      if(!err.response){
+        alert("Something went wrong! Try again Later.")
+      }
       error.innerHTML = err.response.data.Message;
     }
   };
@@ -39,7 +42,7 @@ const Login = () => {
       </div>
       <h1 className="login-heading">Login to Your Account</h1>
       <div className="login-container">
-        <div className="rectangle-6">
+        <div className="rectangle-6login">
           <form className="login-form" onSubmit={handleSubmit}>
             <label className="form-label">
               Email:

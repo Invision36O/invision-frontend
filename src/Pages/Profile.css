@@ -13,8 +13,8 @@
   
   .profile-label {
     display: block;
-    margin: 10px;
     text-align: left;
+    font-size: small;
   }
   
   .profile-input {
@@ -29,7 +29,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
   }
   
   .profile-update-button,
@@ -42,7 +41,6 @@
     box-shadow: none;
     border-radius: 5px;
     width: 80%;
-    margin-bottom: 10px;
   }
   
   .profile-logout-button {

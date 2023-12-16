@@ -14,8 +14,9 @@
     flex-direction: column;
     justify-content: space-between;
     width: 380px;
-    padding: 20px;
+    padding: 30px;
     box-shadow: 0px 0px 10px 0px #000000;
+    height: 80%;
   }
   
   .login-heading {
@@ -37,7 +38,6 @@
     border: none;
     border-radius: 5px;
     width: 80%;
-    margin-top: -5px;
   }
   
   .signup {
@@ -47,6 +47,14 @@
   .buttons {
     display: flex;
     flex-direction: column;
-    margin-top: -35px;
+    margin-top: 35px;
   }
  
+  .rectangle-6login{
+    background: linear-gradient(180deg, rgb(234.6, 77.03, 222.75) 0%, rgb(98, 49, 92) 85.15%);
+    border-radius: 35px 35px 185px 35px;
+    padding: 70px 100px 50px 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  }
