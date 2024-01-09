@@ -8,7 +8,6 @@ export const Homepage = () => {
     <Navbar/>
     <div className="home-page">
       <div className="div">
-        
         {/* <div className="overlap">
           <div className="rectangle" />
           <p className="features">
@@ -52,16 +51,16 @@ export const Homepage = () => {
                 <button className="button">Get Started</button>
           </div>
           </div>
-{/*           
-        <img className="screenshot-2" alt="Screenshot" src="screenshot-2023-10-11-101958-removebg-preview-1.svg" />
+
+          <div className="vision">
+            <h2>Vision</h2>
+            <p> our web application seamlessly transforms 2D floor plans into dynamic 3D models, empowering users to explore and personalize their dream spaces. We aim to inspire architects, homeowners, and design enthusiasts with innovative tools that make envisioning an immersive and accessible experience</p>
+          </div>
+          
         <div className="overlap-4">
           <div className="rectangle-7" />
           <div className="rectangle-8" />
-          <p className="at-we">
-            At Invision360, we simplify <br />
-            home design with 3D conversions of 2D floor plans. We inspire creativity and enrich lives through
-            innovative, user-friendly tools.
-          </p>
+          <p className="at-we">At Invision360, we simplify <br />home design with 3D conversions of 2D floor plans. We inspire creativity and enrich lives throughinnovative, user-friendly tools.</p>
           <div className="text-wrapper-8">Vision</div>
           <div className="text-wrapper-9">Mission</div>
           <img className="screenshot-3" alt="Screenshot" src="/Icons/vision.png" />
@@ -76,19 +75,8 @@ export const Homepage = () => {
           </p>
           <img className="screenshot-4" alt="Screenshot" src="/Icons/mission.png" />
         </div>
-        <div className="overlap-5">
-          <div className="overlap-6">
-            <img className="whatsapp-image-2" alt="Whatsapp image" src="/Icons/logo.png" />
-            <p className="fast-NUCES-FYP-fall"> @Fast NUCES, FYP Fall’23</p>
-          </div>
-          <input
-            className="email"
-            placeholder="Email: Invision360@gmail.com&lt;br/&gt;LinkedIn: Invision360"
-            type="email"
-          /> */}
-        {/* </div> */}
       </div>
-    </div>
+    </div>
   </>
-  );
+    );
 };

@@ -39,7 +39,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-logo">
         <Link to="/">
-          <img src="/Icons/logo.png" alt="INVISION360 Logo" />
+          <img src="/Icons/Logo1.png" alt="INVISION360 Logo" />
         </Link>
       </div>
       <div className="navbar-links">

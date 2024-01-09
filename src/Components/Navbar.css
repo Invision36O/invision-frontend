@@ -9,7 +9,7 @@
 }
 
 .navbar-logo img {
-  height: 70px; /* Adjust the size as needed */
+  height: 10vh; /* Adjust the size as needed */
 }
 
 .navbar-links {
@@ -19,11 +19,12 @@
 
 .navbar-links a {
   text-decoration: none;
-  color: #6e0667;
+  color: #ac0da2;
   padding: 0.3rem 0.7rem;
   border-radius: 4px;
   transition: background-color 0.3s ease;
-  font-size: medium;
+  font-size: larger;
+  font-weight: 500;
   margin: 0rem 0.3rem;
 }
 
