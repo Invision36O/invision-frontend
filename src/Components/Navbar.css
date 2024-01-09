@@ -20,10 +20,11 @@
 .navbar-links a {
   text-decoration: none;
   color: #6e0667;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 0.7rem;
   border-radius: 4px;
   transition: background-color 0.3s ease;
-  font-size: large
+  font-size: medium;
+  margin: 0rem 0.3rem;
 }
 
 .navbar-links a:hover {
