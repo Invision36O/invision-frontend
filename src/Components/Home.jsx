@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import Navbar from "./Navbar";
-
+import Footer from './Footer'
 export const Homepage = () => {
   return (
     <>
@@ -65,6 +65,7 @@ export const Homepage = () => {
           </div>
       </div>
     </div>
+    <Footer/>
   </>
     );
 };

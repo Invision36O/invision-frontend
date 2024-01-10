@@ -1,0 +1,24 @@
+.background{
+    background-color: #841195;
+    margin-top: 5%;
+}
+
+.logos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icons img{
+    height: 35px;
+    width: 35px;
+    margin: 10px;
+}
+.icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+    margin-right: 40px;
+}

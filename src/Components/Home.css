@@ -220,11 +220,11 @@
 
 .digitization img{
   scale: 125%;
-  margin: 10px 40px;
+  margin: 0px 40px;
 }
 
 .model-conversion{
-  margin-top: 5%;
+  margin-top: 1%;
 }
 
 .front-elevation{
@@ -234,4 +234,9 @@
 
 .front-elevation img{
   margin-top: -3%;
+  scale: 90%;
+}
+
+.object-conversion{
+  margin-top: -5%;
 }
