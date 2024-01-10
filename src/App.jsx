@@ -10,6 +10,7 @@ import {LandingPage} from './Components/LandingPage'
 import Signup from './Pages/Signup';
 import Login from './Pages/Login';
 import Profile from './Pages/Profile';
+import Footer from './Components/Footer'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/home" element = {<Homepage/>}/>
         </Routes>
       </BrowserRouter>
+      <Footer/>
     </div>
   );
 }

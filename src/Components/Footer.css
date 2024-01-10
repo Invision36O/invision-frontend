@@ -1,6 +1,7 @@
 .background{
     background-color: #841195;
     margin-top: 5%;
+    padding: 10px;
 }
 
 .logos{
@@ -19,6 +20,21 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 20px;
+    margin: 0px 20px;
     margin-right: 40px;
+}
+
+.info{
+    margin-top: -2%;
+}
+
+.bottom{
+    text-align: center;
+    color: white;
+    font-size: small;
+}
+
+.info li{
+    text-decoration: none;
+    list-style: none;
 }
