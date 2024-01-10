@@ -181,7 +181,7 @@
 
 .features h2{
   font-weight: 600;
-  font-size: x-large;
+  font-size: large;
   background: linear-gradient(185deg, rgb(234.6, 77.03, 222.75) 0%, rgb(98, 49, 98) 95.15%);
   color: #fff;
   padding: 20px 50px;
@@ -219,7 +219,7 @@
 }
 
 .digitization img{
-  scale: 150%;
+  scale: 125%;
   margin: 10px 40px;
 }
 
