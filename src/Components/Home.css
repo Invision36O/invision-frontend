@@ -57,7 +57,7 @@
     overflow: hidden;
     transition: all 0.8s ease;
   }
-  
+
   .details button::after {
     content: '\2192';
     position: absolute;
@@ -148,4 +148,76 @@
   height: 10%;
   width: 10%;
   scale: 250%;
+}
+
+.features{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 6px solid #841195;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px;
+  text-align: center;
+  align-items: center;
+}
+
+.features h1{
+  font-weight: 600;
+  font-size: xxx-large;
+  border-radius: 0 0 15px 15px; /* Adjust values to suit your design */
+  background-color: #841195;
+  width: fit-content;
+  padding: 10px 70px;
+}
+
+.features h2{
+  font-weight: 600;
+  font-size: xx-large;
+  background: linear-gradient(185deg, rgb(234.6, 77.03, 222.75) 0%, rgb(98, 49, 98) 95.15%);
+  color: #fff;
+  padding: 20px 50px;
+  border-radius: 30px;
+  margin: 50px;
+  border: 3px solid #841195;
+}
+
+.model-conversion h2{
+  background: linear-gradient(180deg, rgb(234.6, 77.03, 222.75) 0%, rgb(98, 49, 98) 95.15%);
+}
+
+.object-conversion h2{
+  background: linear-gradient(190deg, rgb(234.6, 77.03, 222.75) 0%, rgb(124, 43, 124) 90.15%);
+}
+
+.space-design h2{
+  background: linear-gradient(180deg, rgb(234.6, 77.03, 222.75) 0%, rgb(124, 43, 124) 90.15%);
+}
+
+.features img{
+  margin: 0px 20px;
+}
+
+.row{
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.digitization{
+  margin-top: 10%;
+}
+
+.digitization img{
+  scale: 150%;
+  margin: 10px 40px;
+}
+
+.model-conversion{
+  margin-top: 5%;
+}
+
+.front-elevation{
+  margin-bottom: 10%;
 }
