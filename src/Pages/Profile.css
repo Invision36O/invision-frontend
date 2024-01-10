@@ -29,6 +29,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 10px;
+  }
+
+  .profile-buttons button{
+    margin: 10px;
   }
   
   .profile-update-button,

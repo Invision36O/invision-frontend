@@ -20,8 +20,10 @@ export const Homepage = () => {
           </div>
 
           <div className="vision">
-            <h1>Vision</h1>
-            <p>Our web application seamlessly transforms 2D floor plans into dynamic 3D models, empowering users to explore and personalize their dream spaces. We aim to inspire architects, homeowners, and design enthusiasts with innovative tools that make envisioning an immersive and accessible experience</p>
+            <div className="text">
+              <h1>Vision</h1>
+              <p>Our web application seamlessly transforms 2D floor plans into dynamic 3D models, empowering users to explore and personalize their dream spaces. We aim to inspire architects, homeowners, and design enthusiasts with innovative tools that make envisioning an immersive and accessible experience</p>
+            </div>
             <img alt="Screenshot" src="/Icons/vision.png" />
           </div>
 

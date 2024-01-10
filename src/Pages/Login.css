@@ -28,16 +28,7 @@
     display: block;
     margin: 10px;
     text-align: left;
-  }
-  
-  .form-button {
-    background-color: #800080;
-    color: #ffffff;
-    padding: 7px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    width: 80%;
+    font-size: medium;
   }
   
   .signup {
@@ -47,13 +38,24 @@
   .buttons {
     display: flex;
     flex-direction: column;
-    margin-top: 35px;
+    margin-top: 5px;
+  }
+
+  .buttons button{
+    background-color: #800080;
+    color: #ffffff;
+    padding: 10px 7px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    width: 80%;
+    font-size: large;
   }
  
   .rectangle-6login{
     background: linear-gradient(180deg, rgb(234.6, 77.03, 222.75) 0%, rgb(98, 49, 92) 85.15%);
     border-radius: 35px 35px 185px 35px;
-    padding: 70px 100px 50px 100px;
+    padding: 70px 100px 15px 100px;
     display: flex;
     justify-content: center;
     flex-direction: row;
