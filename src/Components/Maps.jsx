@@ -46,20 +46,23 @@ function Maps() {
     <>
     <Navbar/>
     <div className="maps">
+      
+        
+
     <div className="container">
       <div className="header">
-        <h1>INVISION360</h1>
-      </div>
+        <h1>Digitized Floor Map</h1>
+              </div>
       <div className="image-display-section">
         <div className="upload-section">
           <form onSubmit={submitImage}>
             <h2>Upload Floor Plan</h2>
             <input type="file" accept="image/*" onChange={onInputChange} />
-            <button type="submit">Submit</button>
+            <button type="submit" className="upload-button">Submit</button>
           </form>
         </div>
         <div className="image-display">
-          <h1 id='loading' className={`loading ${loading ? 'rotating-circle' : ''}`}></h1>
+          <h2 id='loading' className={`loading ${loading ? 'rotating-circle' : ''}`}></h2>
           {imagepath && <img src={imagepath} alt="Processed Image" />}
         </div>
       </div>

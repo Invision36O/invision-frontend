@@ -70,7 +70,7 @@ h1{
   flex-direction: column;
 }
 .rectangle-6{
-  background: linear-gradient(180deg, rgb(234.6, 77.03, 222.75) 0%, rgb(98, 49, 92) 85.15%);
+  background: linear-gradient(180deg, rgb(234.6, 77.03, 222.75) 0%, rgb(81, 49, 98) 85.15%);
   border-radius: 35px 35px 185px 35px;
   padding: 70px 100px 100px 100px;
   display: flex;
