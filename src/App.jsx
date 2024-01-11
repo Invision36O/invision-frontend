@@ -1,12 +1,11 @@
 import React from 'react';
 import ModelView from './Components/ModelView';
-import Space from './Components/3D_Space'
+import Space from './Components/Space'
 import Maps from './Components/Maps'
 import {Routes, BrowserRouter, Route} from 'react-router-dom'
 import FeatureSelection from './Components/FeatureSelection'
 import './App.css'
 import { Homepage } from './Components/Home';
-import {LandingPage} from './Components/LandingPage'
 import Signup from './Pages/Signup';
 import Login from './Pages/Login';
 import Profile from './Pages/Profile';

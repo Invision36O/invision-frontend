@@ -45,6 +45,7 @@ function Maps() {
   return (
     <>
     <Navbar/>
+    <div className="maps">
     <div className="container">
       <div className="header">
         <h1>INVISION360</h1>
@@ -64,6 +65,7 @@ function Maps() {
       </div>
       <a href="/space"><button className='convert-btn'>Convert to 3D</button></a>
 
+    </div>
     </div>
     </>
   );

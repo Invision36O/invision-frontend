@@ -52,3 +52,9 @@
     scale: 101%;
     box-shadow: 3.5px 3px 2px;
 }
+
+.modelview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

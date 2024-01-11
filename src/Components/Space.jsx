@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import './Space.css';
+import Navbar from './Navbar';
 
 export default function ModelView() {
   const [roomData, setRoomData] = useState(null);
@@ -257,14 +258,18 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
  
 
   return (
+    <>
+    <Navbar/>
+    <div className="space">
     <div className="view">
       <div
         className="container"
         ref={containerRef}
-        style={{ width: '800px', height: '620px', border: '3px solid', boxShadow: '5px 5px 4px' }}
+        style={{ margin:'3%', width: '800px', height: '620px' }}
       />
-
-      <a href="/map"><button>Upload Map</button></a>
     </div>
+    <a href="/map"><button className='button'>Upload Map</button></a>
+    </div>
+    </>
   );
 }

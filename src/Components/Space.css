@@ -1,14 +1,30 @@
 .hello{
     color: aquamarine;
 }
-
+.space{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .view{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    border: 5px solid #841195;
+    width: fit-content;
+    height: fit-content;
 }
 .container{
-    margin-top: 10px;
+    margin-top: 10%;
+}
+
+.space button{
+    background-color: #841195;
+    padding: 10px;
+    border-radius: 7px;
+    color: white;
+    margin: 30px;
 }

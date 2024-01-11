@@ -1,4 +1,4 @@
-.container {
+.maps .container {
     font-family: 'Arial', sans-serif;
     background-color: #ffffff;
     width: 100vw;
@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     margin-top: -70px;
+    border: none;
   }
   
   .header {

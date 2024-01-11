@@ -168,6 +168,7 @@ export default function ModelView() {
   return (
     <>
     <Navbar/>
+    <div className="modelview">
     <div className='color'>
     <div className='buttons'>
 <input type="file" accept=".gltf,.glb" style={{ display: 'none' }} onChange={handleImageChange} id="modelFileInput" />
@@ -177,7 +178,8 @@ export default function ModelView() {
 <button className="import-btn" onClick={() => document.getElementById('folderFileInput').click()}>Upload Folder</button>
 </div>
 
-<div className='container' ref={containerRef} style={{minHeight:'200',minWidth:'300',width: '800px',height: '620px', border: '3px solid', boxShadow:'5px 5px 4px'}}/>
+<div className='container' ref={containerRef} style={{minHeight:'200',minWidth:'300',width: '800px',height: '620px', margin:'3%'}}/>
+    </div>
     </div>
     </>
   );
