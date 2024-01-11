@@ -43,13 +43,13 @@ export const Homepage = () => {
             </div>
 
             <div className="model-conversion row">
-              <h2>Convert 2D Digitized Maps into 3D Models</h2>
+              <h2>Convert Digitized 2D Maps into 3D Models</h2>
               <img src="/Icons/conversion.png" alt="" />
             </div>
 
             <div className="object-conversion row">
               <img src="/Icons/Sofa.png" alt="" />
-              <h2>Convert your furniture to 3D Model</h2>
+              <h2>Create 3D Models of your Furniture</h2>
             </div>
 
             <div className="space-design row">

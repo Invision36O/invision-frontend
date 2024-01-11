@@ -3,22 +3,49 @@ import "./FeatureSelection.css";
 import Navbar from "./Navbar";
 function FeatureSelection() {
     return (
-        <div className="html">
-        
-        <div className="feature-window">
-            <Navbar/>
-                    <div className="rectangle" />
-                    <div className="rectangle-2" />
-                    <div className="rectangle-3" />
-                    <div className="rectangle-4" />
-                    <div className="rectangle-5" />
-                    <div className="rectangle-55" />
-                    <div className="rectangle-555" />
-                    <img className="screenshot frontElevation" alt="Screenshot" src="/Icons/Screenshot 2023-10-12 122032 1.png" />
-                    <a href="/ModelView"><img className="screenshot-2 object" alt="Screenshot" src="/Icons/Screenshot 2023-10-12 122520 1.png" /></a>
-                    <a href="/map"><img className="floor-plan-with" alt="Floor plan with" src="/Icons/floor-plan-with-furniture-blueprint-illustration-removebg-preview 1.png"/></a>
+    <div className="html">
+        <Navbar/>
+        <div className="features-box">
+            <h1>Features</h1>
+            <div className="box">
+
+                <div className="frame">
+            <a href="/map"><div class="card-wrapper">
+                        <div class="card-top">
+                            <img class="image" src="/Icons/Digitization1.png"/>
+                        </div>
+                        <div class="card-bottom">
+                            <span class="top-text">Convert Floor Map</span>
+                        </div>
+                    </div> </a>
+                </div>
+
+                <div className="frame">
+            <a href="/object"> <div class="card-wrapper">
+                        <div class="card-top">
+                            <img class="image" src="/Icons/Object1.png"/>
+                        </div>
+                        <div class="card-bottom">
+                            <span class="top-text">Upload Model</span>
+                        </div>
+                    </div>  </a>
+                </div>
+
+                <div className="frame">
+                    <div class="card-wrapper">
+                        <div class="card-top">
+                            <img class="image" src="/Icons/Front1.png"/>
+                        </div>
+                        <div class="card-bottom">
+                            <span class="top-text">Front Elevation</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
-        </div>
+    </div>
     );
 };
 export default FeatureSelection;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Maps.css';
-
+import Navbar from './Navbar';
 function Maps() {
   const [image, setImage] = useState(null);
   const [imagepath, setImagepath] = useState(null);
@@ -43,6 +43,8 @@ function Maps() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="container">
       <div className="header">
         <h1>INVISION360</h1>
@@ -63,6 +65,7 @@ function Maps() {
       <a href="/space"><button className='convert-btn'>Convert to 3D</button></a>
 
     </div>
+    </>
   );
 }
 

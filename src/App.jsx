@@ -24,7 +24,7 @@ function App() {
           <Route path="/features" element={<FeatureSelection/>}/>
           <Route path="/map" element = {<Maps/>}/>
           <Route path="/space" element = {<Space/>}/>
-          <Route path="/modelView" element = {<ModelView/>}/>
+          <Route path="/object" element = {<ModelView/>}/>
           <Route path="/home" element = {<Homepage/>}/>
         </Routes>
       </BrowserRouter>
