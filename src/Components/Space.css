@@ -22,9 +22,24 @@
 }
 
 .space button{
-    background-color: #841195;
-    padding: 10px;
-    border-radius: 7px;
-    color: white;
-    margin-left: 390px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-left: 800px;
+    color:#ffffff;
+    font-weight: 600;
+    font-size: large;
+    border-radius: 100px 300px 100px 300px;
+    background-color: #9500accc;
+    width: fit-content;
+    padding: 9px 38px;
+    align-items: center;
+    text-align: center;
+    margin-left: 650px;
+    margin-top: 30px;
 }
+
+.space button:hover{
+    background-color:#a04cbc;
+    color: #fafcfe;
+    transition: color 0.5s ease;
+  }
