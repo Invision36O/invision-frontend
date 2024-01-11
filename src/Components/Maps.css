@@ -1,7 +1,7 @@
 .maps .container {
     font-family: 'Arial', sans-serif;
     background-color: #ffffff;
-    width: 100vw;
+    width: 90vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
   
   .maps h1{
     font-weight: 400;
-    font-size: xx-large;
+    font-size: large;
     border-radius: 100px 300px 100px 300px;
     background-color: #9500accc;
     width: fit-content;
@@ -30,7 +30,6 @@
   }
   
   .upload-section{
-   
     width: 350px;
     display: flex;
     flex-direction: column;
