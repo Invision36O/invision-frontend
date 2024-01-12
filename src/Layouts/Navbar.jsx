@@ -45,7 +45,7 @@ const Navbar = () => {
       <div className="navbar-links">
         <Link to="/">Home</Link>
         <Link to="/features">Features</Link>
-        <Link to="/contact">Contact</Link>
+        <Link to="/">Contact</Link>
         {userData ? (
           <Link id='username' to="/profile">{userData.username}</Link>
         ) : (

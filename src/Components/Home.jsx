@@ -2,7 +2,7 @@ import React from "react";
 import "./Home.css";
 import Navbar from "../Layouts/Navbar";
 
-export const Homepage = () => {
+export const Home = () => {
   return (
     <>
     <Navbar/>

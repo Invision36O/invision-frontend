@@ -10,7 +10,7 @@ import Signup from './Pages/Signup';
 import Login from './Pages/Login';
 import Profile from './Pages/Profile';
 import Footer from './Layouts/Footer'
-import Home from './Components/Home'
+import {Home} from './Components/Home'
 
 function App() {
   return (
