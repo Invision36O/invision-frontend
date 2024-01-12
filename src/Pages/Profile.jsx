@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Profile.css'; // Import the CSS file
-import Navbar from '../Components/Navbar';
+import Navbar from '../Layouts/Navbar';
 import axios from 'axios'
 
 const Profile = () => {

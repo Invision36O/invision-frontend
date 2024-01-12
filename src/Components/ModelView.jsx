@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 import './ModelView.css';
 import axios from 'axios';
-import Navbar from './Navbar';
+import Navbar from '../Layouts/Navbar';
 export default function ModelView() {
 
   const [modelURL, setModelURL] = useState(null);

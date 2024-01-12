@@ -1,6 +1,6 @@
 import React from "react";
 import "./FeatureSelection.css";
-import Navbar from "./Navbar";
+import Navbar from "../Layouts/Navbar";
 function FeatureSelection() {
     return (
     <div className="html">

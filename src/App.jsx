@@ -5,11 +5,12 @@ import Maps from './Components/Maps'
 import {Routes, BrowserRouter, Route} from 'react-router-dom'
 import FeatureSelection from './Components/FeatureSelection'
 import './App.css'
-import { Homepage } from './Components/Home';
+import { Homepage } from './Components/Homepage';
 import Signup from './Pages/Signup';
 import Login from './Pages/Login';
 import Profile from './Pages/Profile';
-import Footer from './Components/Footer'
+import Footer from './Layouts/Footer'
+import Home from './Components/Home'
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <Route path="/map" element = {<Maps/>}/>
           <Route path="/space" element = {<Space/>}/>
           <Route path="/object" element = {<ModelView/>}/>
-          <Route path="/home" element = {<Homepage/>}/>
+          <Route path="/home" element = {<Home/>}/>
         </Routes>
       </BrowserRouter>
       <Footer/>

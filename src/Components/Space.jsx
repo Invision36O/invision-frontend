@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import './Space.css';
-import Navbar from './Navbar';
+import Navbar from '../Layouts/Navbar';
 
 export default function ModelView() {
   const [roomData, setRoomData] = useState(null);

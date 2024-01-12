@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Maps.css';
-import Navbar from './Navbar';
+import Navbar from '../Layouts/Navbar';
 function Maps() {
   const [image, setImage] = useState(null);
   const [imagepath, setImagepath] = useState(null);
