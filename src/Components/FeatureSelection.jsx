@@ -3,8 +3,10 @@ import "./FeatureSelection.css";
 import Navbar from "../Layouts/Navbar";
 function FeatureSelection() {
     return (
-    <div className="html">
+        <>
         <Navbar/>
+    <div className="html">
+        
         <div className="features-box">
             <h1>Features</h1>
             <div className="box">
@@ -46,6 +48,7 @@ function FeatureSelection() {
             </div>
         </div>
     </div>
+    </>
     );
 };
 export default FeatureSelection;

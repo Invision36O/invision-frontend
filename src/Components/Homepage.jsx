@@ -1,11 +1,10 @@
 import React from "react";
 import "./Homepage.css";
-import Navbar from "../Layouts/Navbar";
-import Footer from '../Layouts/Footer'
+
 export const Homepage = () => {
+  
   return (
     <>
-    <Navbar/>
     <div className="home-page">
       <div className="div">
 

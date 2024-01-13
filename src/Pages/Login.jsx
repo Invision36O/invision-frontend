@@ -37,10 +37,9 @@ const Login = () => {
 
   return (
     <div className='login'>
-      <div className='nav'>
-        <Navbar />
-      </div>
+      <div className="login-heading-container">
       <h1 className="login-heading">Login to Your Account</h1>
+      </div>
       <div className="login-container">
         <div className="rectangle-6login">
           <form className="login-form" onSubmit={handleSubmit}>

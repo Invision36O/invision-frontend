@@ -1,69 +1,81 @@
 import React from "react";
 import "./Home.css";
-import Navbar from "../Layouts/Navbar";
 
 export const Home = () => {
   return (
     <>
-    <Navbar/>
-    <div className="home-page">
-      <div className="div">
+    <div className="home">
 
-          <div className="box">
+
+      <div className="sidebar">
+
+        <div className="info">
+          <div className="details">
             <div className="image">
-                <img className="element-model-house-room" alt="Element model house room" src="/Icons/3DHouse.png"/>
+            <i class="fa fa-user" aria-hidden="true"></i>
             </div>
-            <div className="details">
-                <h1 className="your-dreams-in">Your Dreams in 3D<br/>Design, Visualize, Personalize!</h1>
-                <button className="button">Get Started</button>
-          </div>
-          </div>
-
-          <div className="vision">
-            <div className="text">
-              <h1>Vision</h1>
-              <p>Our web application seamlessly transforms 2D floor plans into dynamic 3D models, empowering users to explore and personalize their dream spaces. We aim to inspire architects, homeowners, and design enthusiasts with innovative tools that make envisioning an immersive and accessible experience</p>
-            </div>
-            <img alt="Screenshot" src="/Icons/vision.png" />
-          </div>
-
-          <div className="mission">
-          <img alt="Screenshot" src="/Icons/mission.png"/>
-            <div className="text">
-              <h1>Mission</h1>
-              <p>At Invision360, we simplify home design with 3D conversions of 2D floor plans. We inspire creativity and enrich lives throughinnovative, user-friendly tools.</p>
+            <div className="userinfo">
+              <h1 className="user-name" id="username">Saim Saleem</h1>
+              <p className="username" id="username">Free Tier</p> 
             </div>
           </div>
 
-          <div className="features">
-            <h1>Features</h1>
-            <div className="digitization row">
-              <img src="/Icons/floorplan.png" alt="" />
-              <h2>Convert 2D Floor Maps into Digitized Maps</h2>
-            </div>
+          <button className="pro">Try Pro <i class="fa fa-star" aria-hidden="true"></i></button>
+          <button className="home-btn"> <i className="fa fa-home" ></i>&nbsp;&nbsp;Home</button>
+        </div>
 
-            <div className="model-conversion row">
-              <h2>Convert Digitized 2D Maps into 3D Models</h2>
-              <img src="/Icons/conversion.png" alt="" />
-            </div>
 
-            <div className="object-conversion row">
-              <img src="/Icons/Sofa.png" alt="" />
-              <h2>Create 3D Models of your Furniture</h2>
-            </div>
 
-            <div className="space-design row">
-              <h2>Design & Personalize your 3D Space</h2>
-              <img src="/Icons/space-design.png" alt="" />
-            </div>
+        <div className="links">
+          <button>
+          <span className="button">
+            <div className="iconss"><i class="fa fa-folder-open" aria-hidden="true"></i></div>
+            <p>Projects</p>
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </span>
+          </button>
 
-            <div className="front-elevation row">
-              <img src="/Icons/frontelevation.png" alt="" />
-              <h2>Choose and Customize Front Elevation</h2>
-            </div>
+          <button>
+          <span className="button">
+            <div className="iconss"><img src="/Icons/room-icon.webp" height={20} width={20} alt="" /></div>
+            <p>3D Spaces</p>
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </span>
+          </button>
 
-          </div>
+          <button>
+          <span className="button">
+            <div className="iconss"><i class="fa fa-cube" aria-hidden="true"></i></div>
+            <p>3D Models</p>
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </span>
+          </button>
+
+          <button>
+          <span className="button">
+            <div className="iconss"><i class="fa fa-building" aria-hidden="true"></i></div>
+            <p>Front Elevations</p>
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </span>
+          </button>
+          
+        </div>
+
+        
+
+
       </div>
+
+      <div className="main">
+
+
+      </div>
+
+
+
+
+
+
     </div>
   </>
     );

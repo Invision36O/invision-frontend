@@ -1,5 +1,4 @@
 .features-box{
-    margin-top: 1%;
     margin-bottom: 8%;
     display: flex;
     justify-content: center;
@@ -39,6 +38,7 @@
 }
 
 .features-box h1{
+    margin-top: 6%;
     font-weight: 400;
     font-size: xx-large;
     border-radius: 100px 300px 100px 300px;
@@ -88,7 +88,7 @@
 .features-box .card-bottom {
     width: 100%;
     position: absolute;
-    z-index: 20;
+    z-index: 2;
     top: 50%;
     background-color: rgba(162, 13, 157, 0);
     color: #fff;
@@ -102,3 +102,9 @@
     letter-spacing: 1px;
     color: black;
 }
+
+@media (max-width: 1250px) {
+    .features-box .top-text {
+        font-size: 20px;
+    }
+  }

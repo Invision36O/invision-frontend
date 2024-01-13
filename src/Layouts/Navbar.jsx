@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({scrolled}) => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -36,14 +36,15 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="navbar">
+    <>
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-logo">
         <Link to="/">
           <img src="/Icons/Logo1.png" alt="INVISION360 Logo" />
         </Link>
       </div>
       <div className="navbar-links">
-        <Link to="/">Home</Link>
+        <Link to="/home">Home</Link>
         <Link to="/features">Features</Link>
         <Link to="/">Contact</Link>
         {userData ? (
@@ -52,7 +53,8 @@ const Navbar = () => {
           <Link id='username' to="/login">Login</Link>
         )}
       </div>
-    </nav>
+      </nav>
+      </>
   );
 };
 

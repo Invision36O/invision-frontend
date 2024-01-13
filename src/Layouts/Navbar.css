@@ -1,15 +1,18 @@
-/* Navbar.css */
-
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #95049500; /* Adjust the color to match your design */
+  background-color: #ffffff;
   padding: 0.5rem 2rem;
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  margin: 0%;
+  transition: box-shadow 0.3s ease;
 }
 
 .navbar-logo img {
-  height: 10vh; /* Adjust the size as needed */
+  height: 10vh;
 }
 
 .navbar-links {
@@ -29,34 +32,35 @@
 }
 
 .navbar-links a:hover {
-  background-color: #b015a6b3; /* A slightly darker shade for the hover state */
+  background-color: #b015a6b3;
   color: #ffffff;
 }
 
-/* You can add a class to the link that is active so that it can have a different style */
 .navbar-links .active {
-  background-color: #4b0082; /* A different shade to indicate the active page */
+  background-color: #4b0082;
   color: #ffffff;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .navbar-links {
-    display: none; /* Hide the links on smaller screens */
-    /* You might want to add a hamburger menu icon and script to toggle the links */
+    display: none;
   }
 
   .navbar-logo img {
-    height: 40px; /* Adjust the size for smaller screens */
+    height: 40px;
   }
 }
 
-/* Additional styles for Login/Signup button to make it stand out */
 .navbar-links a.login-signup {
-  background-color: #4CAF50; /* Adjust the color to match your design */
+  background-color: #4CAF50;
   color: white;
 }
 
 .navbar-links a.login-signup:hover {
-  background-color: #367c39; /* A darker shade for the hover state */
+  background-color: #367c39;
+}
+
+.navbar.scrolled {
+  box-shadow: #841195 0 0px 4px;
 }

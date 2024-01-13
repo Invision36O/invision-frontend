@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Navbar from '../Layouts/Navbar';
 import './Signup.css'; 
+import Navbar from '../Layouts/Navbar';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -40,9 +40,11 @@ const Signup = () => {
   };
 
   return (
+    <>
     <div className='signup'>
-      <div className='nav'><Navbar /></div>
+      <div className="signup-heading-container">
       <h1 className="signup-heading">Create Your Account</h1>
+      </div>
       <div className="signup-container">
       <div className="rectangle-6">
         <form className="signup-form" onSubmit={handleSubmit}>
@@ -83,6 +85,7 @@ const Signup = () => {
       </div>
       
     </div>
+    </>
   );
 };
 
