@@ -76,6 +76,7 @@ const Profile = () => {
   return (
     <>
       <Navbar />
+      <div className="profile-main">
       <h1 className="profile-heading">My Profile</h1>
       <div className='profile'>
         <div className="profile-rectangle-6">
@@ -133,6 +134,7 @@ const Profile = () => {
             <img className="element-model-house-room" alt="Element model house room" src="/Icons/3DHouse.png"/>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

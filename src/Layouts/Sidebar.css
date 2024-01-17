@@ -1,0 +1,156 @@
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+.sidebar-main{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.sidebar-main .sidebar{
+  position: fixed;
+  left: 0%;
+  padding: 2% 2%;
+  width: 20%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.sidebar .info .pro{
+  text-align: center;
+  font-weight: 500;
+}
+.sidebar .info button{
+  background-color: #f7f7f7;
+  padding: 10px;
+  width: 100%;
+  border-radius: 6px;
+  margin: 10px;
+  text-align: left;
+  transition: all 0.3s;
+}
+.sidebar .info button:hover{
+  background-color: #eaeaea;
+}
+
+.sidebar .info .details{
+  display: flex;
+  margin: 0%;
+  padding: 0%;
+}
+
+.sidebar .info .details a{
+  display: flex;
+  width: 80%;
+}
+
+.sidebar .info{
+  width: 100%;
+}
+
+.sidebar .info .details{
+  align-items: center;
+  text-align: center;
+}
+.sidebar .info .details i{
+  font-size: 30px;
+}
+.sidebar .info .userinfo{
+  margin-left: 4%;
+  align-items: center;
+  text-align: center;
+}
+
+.sidebar .info .user-name{
+  font-size: larger;
+  text-align: left;
+  margin: 0%;
+  padding: 0%;
+  font-weight: 500;
+  color: #841195;
+}
+.sidebar .info .name{
+margin: 0px;
+padding: 0px;
+}
+.sidebar .info p{
+  font-size: small;
+  text-align: left;
+  margin: -8% 0% 0% 1%;
+  padding: 0%;
+  color: rgb(132, 132, 132);
+  color: #841195;
+
+}
+
+.info .pro button{
+  text-align: center;
+  font-weight: 500;
+}
+
+.sidebar .links{
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sidebar .links span{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.sidebar .links span p{
+  width: 100%;
+  text-align: left;
+  margin-left: 4%;
+}
+
+.sidebar .links span .iconss{
+  width: 11%; 
+  text-align: center;
+  align-items: center;
+}
+
+.sidebar .links button{
+  background-color: #ffffff;
+  padding: 10px;
+  width: 100%;
+  border-radius: 6px;
+  margin: 10px 10px 0px 0px;
+  text-align: left;
+  transition: all 0.3s;
+}
+.sidebar .links button:hover{
+  background-color: #eaeaea;
+}
+
+.sidebar-main .sidebar h1{
+  color: black;
+}
+
+.sidebar-main .settings{
+  margin-top: 35%;
+}
+
+.sidebar-main .main{
+  width: 80%;
+}
+
+.sidebar-main .box{
+  border-radius: 10px;
+  background: linear-gradient(170deg, rgb(244, 61, 229) 0%, rgb(184, 7, 178) 85.15%);
+}
+
+.sidebar-main .box h1{
+  font-size: xx-large;
+  font-family: sans-serif ms;
+  font-weight: 500;
+}
+
+.sidebar-main .box .heading{
+  padding-top: 1%;
+}

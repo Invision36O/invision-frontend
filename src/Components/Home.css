@@ -1,137 +1,38 @@
 @import '@fortawesome/fontawesome-free/css/all.css';
 
+.home-main{
+  display: flex;
+  flex-direction: row;
+}
+
+.home-main .sidebar{
+  left: 0%;
+  width: 20%;
+  margin-top: 2.5%;
+}
+
 .home{
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding: 2%;
   padding-top: 7%;
-}
-
-.home .sidebar{
-  padding: 2% 2%;
-  width: 20%;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-      /* border: 10px solid rgba(128, 0, 128, 0.029); */
-      /* border-image: linear-gradient(to top, rgba(0, 0, 0, 0), #000, rgba(0, 0, 0, 0)) 0.5; */
-      /* Adjust the colors and gradient direction as needed */
-      box-sizing: border-box;
-}
-
-.sidebar .info .pro{
-  text-align: center;
-  font-weight: 500;
-}
-.sidebar .info button{
-  background-color: #f7f7f7;
-  padding: 10px;
-  width: 100%;
-  border-radius: 6px;
-  margin: 10px;
-  text-align: left;
-  transition: all 0.3s;
-}
-.sidebar .info button:hover{
-  background-color: #eaeaea;
-}
-
-.sidebar .info .details{
-  display: flex;
-  margin: 0%;
-  padding: 0%;
-}
-.sidebar .info{
-  width: 100%;
-}
-
-.sidebar .info .details{
-  align-items: center;
-  text-align: center;
-}
-.sidebar .info .details i{
-  font-size: 30px;
-}
-.sidebar .info .userinfo{
-  margin-left: 4%;
-  align-items: center;
-  text-align: center;
-}
-
-.sidebar .info .user-name{
-  font-size: larger;
-  text-align: left;
-  margin: 0%;
-  padding: 0%;
-  font-weight: 500;
-  color: #841195;
-}
-.sidebar .info .name{
-margin: 0px;
-padding: 0px;
-}
-.sidebar .info p{
-  font-size: small;
-  text-align: left;
-  margin: -8% 0% 0% 1%;
-  padding: 0%;
-  color: rgb(132, 132, 132);
-  color: #841195;
-
-}
-
-.info .pro button{
-  text-align: center;
-  font-weight: 500;
-}
-
-.sidebar .links{
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.sidebar .links span{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-.sidebar .links span p{
-  width: 100%;
-  text-align: left;
-  margin-left: 4%;
-}
-
-.sidebar .links span .iconss{
-  width: 11%; 
-  text-align: center;
-  align-items: center;
-}
-
-.sidebar .links button{
-  background-color: #ffffff;
-  padding: 10px;
-  width: 100%;
-  border-radius: 6px;
-  margin: 10px 10px 0px 0px;
-  text-align: left;
-  transition: all 0.3s;
-}
-.sidebar .links button:hover{
-  background-color: #eaeaea;
-}
-
-.home .sidebar h1{
-  color: black;
-}
-
-.home .main{
-  margin: 0 2%;
   width: 80%;
-  min-width: 500px;
-  min-height: 1000px;
-  background-color: aquamarine;
+  padding-bottom: 80%;
+}
+
+
+.home .box{
+  border-radius: 10px;
+  background: linear-gradient(170deg, rgb(244, 61, 229) 0%, rgb(184, 7, 178) 85.15%);
+}
+
+.home .box h1{
+  font-size: xx-large;
+  font-family: sans-serif ms;
+  font-weight: 500;
+}
+
+.home .box .heading{
+  padding-top: 1%;
 }
