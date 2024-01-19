@@ -178,7 +178,7 @@ export default function ModelView() {
 <button className="import-btn" onClick={() => document.getElementById('folderFileInput').click()}>Upload Folder</button>
 </div>
 
-<div className='container' ref={containerRef} style={{minHeight:'200',minWidth:'300',width: '800px',height: '620px', margin:'3%'}}/>
+<div className='container' ref={containerRef} style={{minHeight:'200',minWidth:'300',width: '800px',height: '620px'}}/>
     </div>
     </div>
     </>

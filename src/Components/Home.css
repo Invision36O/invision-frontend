@@ -33,7 +33,7 @@
 }
 
 .home .box h1{
-  font-size: xx-large;
+  font-size: 30px;
   font-family: sans-serif ms;
   font-weight: 500;
 }
@@ -66,7 +66,7 @@
   justify-content: center;
   align-items: center;
   color: white;
-  margin: 3%;
+  margin: 2.5%;
   cursor: pointer;
   margin-top: 0%;
   padding-top: 0%;
@@ -107,7 +107,7 @@
 }
 
 .button.selected{
-  border-bottom:  5px solid #d103c7;
+  border-bottom:  4px solid #d103c7;
 }
 
 .home .main .content h1{
