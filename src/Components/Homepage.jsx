@@ -1,8 +1,16 @@
 import React from "react";
 import "./Homepage.css";
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
 
 export const Homepage = () => {
+  const navigate = useNavigate();
+
+  const getStarted = () =>{
+    navigate('/home');
+  }
   
+
   return (
     <>
     <div className="home-page">
@@ -14,7 +22,7 @@ export const Homepage = () => {
             </div>
             <div className="details">
                 <h1 className="your-dreams-in">Your Dreams in 3D<br/>Design, Visualize, Personalize!</h1>
-                <button className="button">Get Started</button>
+                <button className="button" onClick={getStarted}>Get Started</button>
           </div>
           </div>
 
