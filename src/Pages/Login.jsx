@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Navbar from '../Layouts/Navbar';
 import './Login.css';
 
 const Login = () => {
@@ -9,6 +8,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -25,7 +25,8 @@ const Login = () => {
       const response = await axios.post('http://localhost:3001/user/login', formData);
       console.log(response.data);
       localStorage.setItem('token', response.data.token);
-      navigate('/');
+      navigate('/home');
+      location.reload();
     } catch (err) {
       console.error('Error logging in');
       if(!err.response){
