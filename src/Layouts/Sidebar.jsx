@@ -1,7 +1,44 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./Sidebar.css";
 
 export const Sidebar = () => {
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+
+  const fetchUserData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+
+      if (token) {
+        const response = await fetch('http://localhost:3001/user/getUser', {
+          headers: {
+            token: token,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          setUserData(data);
+          
+        } else {
+          const errorData = await response.json();
+          setError(errorData.message);
+        }
+      }
+    } catch (error) {
+      setError('An error occurred while fetching user data.');
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchUserData();
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
     <div className="sidebar-main">
@@ -16,7 +53,12 @@ export const Sidebar = () => {
             <i class="fa fa-user" aria-hidden="true"></i>
             </div>
             <div className="userinfo">
-              <h1 className="user-name" id="username">Saim Saleem</h1>
+            {userData ? (
+            <h1 className="user-name" id="username">{userData.name}</h1>
+          ) : (
+            <h1></h1>
+          )}
+              
               <p className="username" id="username">Free Tier</p> 
             </div>
             </a>

@@ -7,11 +7,6 @@ export const Home = () => {
   const [selectedButton, setSelectedButton] = useState('For You');
   const [isHidden, setIsHidden] = useState(false);
 
-  const handleDigitize = () => {
-
-  }
- 
-
   const ForYouContent = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
   

@@ -43,7 +43,6 @@ const Profile = () => {
     console.log('Logging out');
     localStorage.removeItem('token');
     navigate('/login')
-    location.reload()
   };
 
   useEffect(() => {

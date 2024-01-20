@@ -26,7 +26,7 @@ const Login = () => {
       console.log(response.data);
       localStorage.setItem('token', response.data.token);
       navigate('/home');
-      location.reload();
+       
     } catch (err) {
       console.error('Error logging in');
       if(!err.response){
