@@ -6,7 +6,7 @@ const Navbar = ({ scrolled }) => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
 
-  const fetchUserData = async () => {
+  useEffect(async() => {
     try {
       const token = localStorage.getItem('token');
 
@@ -29,14 +29,6 @@ const Navbar = ({ scrolled }) => {
     } catch (error) {
       setError('An error occurred while fetching user data.');
     }
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetchUserData();
-    };
-
-    fetchData();
   }, []);
 
   return (

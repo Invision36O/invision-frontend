@@ -167,7 +167,6 @@ export default function ModelView() {
 
   return (
     <>
-    <Navbar/>
     <div className="modelview">
     <div className='color'>
     <div className='buttons'>

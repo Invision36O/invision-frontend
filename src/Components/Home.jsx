@@ -2,11 +2,18 @@ import React,{useState, useEffect} from "react";
 import "./Home.css";
 import { Sidebar } from "../Layouts/Sidebar";
 import { CSSTransition } from "react-transition-group";
+import axios from 'axios';
 
 export const Home = () => {
   const [selectedButton, setSelectedButton] = useState('For You');
   const [isHidden, setIsHidden] = useState(false);
 
+  const handleDigitize = (filename) => {
+    console.log(`/displaymap/${filename}`)
+    return () => {
+      window.location.href = `/displaymap/${filename}`;
+    };
+  };
   const ForYouContent = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
@@ -16,6 +23,7 @@ export const Home = () => {
       "/Icons/DesignSpace.png",
       "/Icons/FrontElevationChoice.png",
     ];
+
   
     useEffect(() => {
       const intervalId = setInterval(() => {
@@ -43,28 +51,79 @@ export const Home = () => {
     );
   };
   
-  const MapDigitizationContent = () => (
-    <div className="map-digitization">
-      <div className="subheading"><h1>Maps</h1></div>
-      <div className="content">
+  const MapDigitizationContent = () => {
+    const [uploadedMaps, setUploadedMaps] = useState([]);
+  
+    useEffect(() => {
+      const fetchUploadedMaps = async () => {
+        try {
+          const response = await axios.get('http://localhost:3001/map/getMaps');
+          setUploadedMaps(response.data);
+          console.log(response.data)
+          
+        } catch (error) {
+          console.error('Error fetching uploaded maps:', error);
+        }
+      };
 
-        <div className="card">
-          <a href="/map" className="card"><div className="card-image"><img src="/Icons/card/DigitizeMap.png" alt="" height={150}width={150}/></div>
-          <div className="heading">
-            <h3>Upload Map</h3>
+      fetchUploadedMaps();
+    }, []);
+
+    return (
+      <div className="map-digitization">
+        <div className="subheading"><h1>Your Maps</h1></div>
+        <div className="content">
+          <div className="yourmaps">
+          <div className="card">
+            <a href="/uploadmap" className="card">
+              <div className="card-image">
+                <img src="/Icons/card/DigitizeMap.png" alt="" height={150} width={150} />
+              </div>
+              <div className="heading">
+                <h3>Upload Map</h3>
+              </div>
+              <div className="subheading">
+                <p>Upload your map to convert it into 3D </p>
+              </div>
+            </a>
           </div>
-          <div className="subheading">
-            <p>Upload your map to convert it into 3D </p>
-          </div></a>
+
+          {uploadedMaps.map((map) => (
+                <div className="card" key={map._id}>
+                  <div className="card-image">
+                  <div className="image-box"><img src={`http://localhost:3001/public/uploadedImages/${map.filename}`} alt="" height={150} width={149}/></div>
+                  </div>
+                  <div className="heading">
+                    <h3>{map.name}</h3>
+                  </div>
+                  <div className="subheading">
+                  <button onClick={handleDigitize(map.filename)} className="digitize-btn">Digitize</button>
+                  </div>
+                </div>
+              ))}
+
+            </div>
+
+          <div className="mymaps">
+            <div className="subheading"><h1>Digitized Maps</h1></div>
+            <div className="card">
+            <a href="/map" className="card">
+              <div className="card-image">
+                <img src="/Icons/card/DigitizeMap.png" alt="" height={150} width={150} />
+              </div>
+              <div className="heading">
+                <h3>Digitize Map</h3>
+              </div>
+              <div className="subheading">
+                <p>Upload your map to convert it into 3D </p>
+              </div>
+            </a>
+          </div>
+          </div>
         </div>
-
-      <div className="mymaps">
-        <div className="subheading"><h1>Digitized Maps</h1></div>
       </div>
-
-      </div>
-    </div>
-  );
+    );
+  };
   
   const ModelGenerationContent = () => (
     <div className="model-generation">

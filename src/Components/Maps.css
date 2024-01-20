@@ -11,6 +11,18 @@
     border: none;
     padding-top: 80px;
   }
+
+  .maps .container .form-input{
+    border: 1px solid #a04cbc;
+    margin-bottom: 0%;
+  }
+
+  .uploadmap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   
   .maps h1{
     font-weight: 400;

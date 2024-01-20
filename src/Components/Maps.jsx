@@ -6,6 +6,7 @@ function Maps() {
   const [image, setImage] = useState(null);
   const [imagepath, setImagepath] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("")
 
   const submitImage = async (e) => {
     e.preventDefault();
@@ -14,10 +15,11 @@ function Maps() {
 
     const formData = new FormData();
     formData.append('image', image);
+    formData.append('name', name);
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/map/uploadmap',
+        'http://localhost:3001/map/digitizemap',
         formData,
         {
           headers: { 'Content-Type': 'multipart/form-data' },
@@ -44,7 +46,6 @@ function Maps() {
 
   return (
     <>
-    <Navbar/>
     <div className="maps">
       
         
@@ -58,6 +59,10 @@ function Maps() {
           <form onSubmit={submitImage}>
             <h2>Upload Floor Plan</h2>
             <input type="file" accept="image/*" onChange={onInputChange} />
+            <label className="form-label">
+              Save as:
+              <input type="text" name="img-name" placeholder='Name' value={name} onChange={(event) => {setName(event.target.value);}} className="form-input"/>
+            </label>
             <button type="submit" className="upload-button">Submit</button>
           </form>
         </div>

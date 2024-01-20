@@ -13,6 +13,9 @@ import Profile from './Pages/Profile';
 import Footer from './Layouts/Footer'
 import {Home} from './Components/Home'
 import Navbar from './Layouts/Navbar';
+import DisplayMap from './Components/DisplayMap'
+import UploadMap from './Components/UploadMap';
+
 
 function App() {
 
@@ -42,6 +45,8 @@ function App() {
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/features" element={<FeatureSelection/>}/>
           <Route path="/map" element = {<Maps/>}/>
+          <Route path="/displaymap/:filename" component={DisplayMap} />
+          <Route path="/uploadmap" element = {<UploadMap/>}/>
           <Route path="/space" element = {<Space/>}/>
           <Route path="/object" element = {<ModelView/>}/>
           <Route path="/home" element = {<Home/>}/>

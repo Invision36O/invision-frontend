@@ -75,7 +75,6 @@ const Profile = () => {
 
   return (
     <>
-      <Navbar />
       <div className="profile-main">
       <h1 className="profile-heading">My Profile</h1>
       <div className='profile'>

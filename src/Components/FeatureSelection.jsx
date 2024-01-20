@@ -4,7 +4,6 @@ import Navbar from "../Layouts/Navbar";
 function FeatureSelection() {
     return (
         <>
-        <Navbar/>
     <div className="html">
         
         <div className="features-box">

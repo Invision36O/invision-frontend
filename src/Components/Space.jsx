@@ -259,7 +259,6 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
 
   return (
     <>
-    <Navbar/>
     <div className="space">
     <div className="view">
       <div
