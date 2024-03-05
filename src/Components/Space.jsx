@@ -2,13 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
 import './Space.css';
-import Navbar from '../Layouts/Navbar';
+
 
 export default function ModelView() {
+
   const [roomData, setRoomData] = useState(null);
+  const [models, setModels] = useState([]);
   const containerRef = useRef(null);
-  const loadedModel = null; 
+  const loadedModel = null;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,14 +23,30 @@ export default function ModelView() {
         }
         const data = await response.json();
         setRoomData(data);
-        console.log(data);
       } catch (error) {
         console.error('Could not fetch room data:', error);
       }
     };
 
     fetchData();
-  }, []);
+
+    const fetchModels = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/model/getModels');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setModels(data);
+        console.log(data);
+      } catch (error) {
+        console.error('Could not fetch room data:', error);
+      }
+    };
+
+    fetchModels();
+  }, []); 
+
 
   function createTextSprite(text, color = '#FFF') {
     const canvas = document.createElement('canvas');
@@ -41,13 +61,13 @@ export default function ModelView() {
     return sprite;
   }
 
+  const scene = useRef(new THREE.Scene()).current;
+  scene.background = new THREE.Color(0x000000);// Dark background for better visibility
+
   useEffect(() => {
     if (!roomData) return;
 
     const container = containerRef.current;
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000); // Dark background for better visibility
-
     const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
     camera.position.set(0, 50, 50);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -255,20 +275,106 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
     return () => window.removeEventListener('resize', handleResize);
   }, [roomData]);
 
- 
 
+  const handleDragStart = (e, model) => {
+    e.dataTransfer.setData("application/my-app", model.destinationPath);
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const destinationPath = e.dataTransfer.getData("application/my-app");
+  
+    // Assuming you have a function to load models by their path
+    loadModelIntoScene(destinationPath);
+  };
+
+
+  const loadModelIntoScene = (path) => {
+    const loader = new GLTFLoader();
+    const modelPath = `http://localhost:3001/${path.replace(/\\/g, '/')}`;
+  
+    console.log(`Loading model from: ${modelPath}`);
+    
+    loader.load(
+      modelPath,
+      (gltf) => {
+        // Assuming the floor is at y=0
+        const box = new THREE.Box3().setFromObject(gltf.scene);
+        const height = box.max.y - box.min.y;
+        const floorPositionY = 0; // Change this if your floor is not at y=0
+  
+        // Adjust model properties here
+        gltf.scene.scale.set(1, 1, 1); // Adjust scale as needed
+        gltf.scene.position.set(0, floorPositionY - box.min.y, 0); // Adjust position so model sits on the floor
+        scene.add(gltf.scene);
+        console.log("Model added to the scene:", gltf.scene);
+      },
+      undefined, // Progress callback (optional)
+      (error) => {
+        console.error('An error happened while loading the model:', error);
+        // Add a cube as a fallback or indicator
+        addCubeToScene();
+      }
+    );
+  };
+  
+  
+  const addCubeToScene = () => {
+    console.log("Attempting to add a cube to the scene"); // Debugging
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
+    cube.position.set(0, 0, 0);
+    scene.add(cube); // Assuming `scene` is the correct reference
+    console.log("Cube added to the scene as a fallback/indicator.");
+  };
   return (
     <>
-    <div className="space">
-    <div className="view">
-      <div
-        className="container"
-        ref={containerRef}
-        style={{ margin:'3%', width: '800px', height: '620px' }}
-      />
+    
+   
+  <div className="main-container">
+    <div className="left-container">
+      <div className="space">
+        <div className="view">
+        <div
+  className="container"
+  ref={containerRef}
+  onDragOver={(e) => e.preventDefault()}
+  onDrop={handleDrop}
+  style={{ margin: '3%', width: '700px', height: '520px' }}
+/>
+        </div>
+        <a href="/map"><button className='button'>Upload Map</button></a>
+      </div>
     </div>
-    <a href="/map"><button className='button'>Upload Map</button></a>
+
+    <div className="right-container">
+      <div className="objlayout">
+      <div className="models">
+          {models.map((model, index) => (
+            <div
+              key={index}
+             draggable="true"
+             onDragStart={(e) => handleDragStart(e, model)}
+             className="model-item"
+           >
+             {model.filename}
+           </div>
+         ))}
+      </div>
+      </div>
+
     </div>
+
+   
+ 
+</div>
+
     </>
   );
-}
+
+
+
+  
+};
