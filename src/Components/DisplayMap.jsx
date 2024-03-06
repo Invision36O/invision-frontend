@@ -22,7 +22,7 @@ useEffect(async() => {
       );
       console.log('Response: ', response);
       const processedImagePath =
-        'http://localhost:3001/public/processedImages/' + response.data.imagename;
+        'http://localhost:3001/processedImages/${response.data.imagename}' ;
       console.log(processedImagePath);
       setImagepath(processedImagePath);
       document.getElementById('loading').innerHTML = "";
