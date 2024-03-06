@@ -338,7 +338,7 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
       <div className="space">
         <div className="view">
         <div
-  className="container"
+  className="container" 
   ref={containerRef}
   onDragOver={(e) => e.preventDefault()}
   onDrop={handleDrop}
