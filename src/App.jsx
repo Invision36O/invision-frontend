@@ -15,7 +15,9 @@ import {Home} from './Components/Home'
 import Navbar from './Layouts/Navbar';
 import DisplayMap from './Components/DisplayMap'
 import UploadMap from './Components/UploadMap';
-
+import FrontElevationSelector from './Components/FrontElevationSelector';
+import FrontElevationList from './Components/FrontElevationList';
+import CustomizeElevation from './Components/CustomizeElevation';
 
 function App() {
 
@@ -50,7 +52,10 @@ function App() {
           <Route path="/space" element = {<Space/>}/>
           <Route path="/object" element = {<ModelView/>}/>
           <Route path="/home" element = {<Home/>}/>
-        </Routes>
+          <Route path="/FrontElevationSelector" element={<FrontElevationSelector/>}/>
+          <Route path="/FrontElevationList" element={<FrontElevationList />} />
+          <Route path="/CustomizeElevation" element={<CustomizeElevation/>}/>
+        </Routes> 
       </BrowserRouter>
       <Footer/>
     </div>
