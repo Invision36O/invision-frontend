@@ -59,7 +59,9 @@
 
     background-color: rgb(214, 227, 227);
     height: 89%;
-    width: 90%;
+    width: 230%;
     
   }
-  
+  .cursor-grabbing {
+    cursor: grabbing;
+  }

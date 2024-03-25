@@ -13,6 +13,15 @@ export default function ModelView() {
   const [models, setModels] = useState([]);
   const containerRef = useRef(null);
   const loadedModel = null;
+  const cameraRef = useRef(null); 
+  // Additional ref for tracking the selected model in the scene
+  const selectedModelRef = useRef(null);
+  
+  const raycasterRef = useRef(new THREE.Raycaster());
+  const mouse = useRef(new THREE.Vector2());
+  const [selectedObject, setSelectedObject] = useState(null);
+  const [isRotating, setIsRotating] = useState(false);
+  const [indicator, setIndicator] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,7 +80,7 @@ export default function ModelView() {
     const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
     camera.position.set(0, 50, 50);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
-
+    cameraRef.current = camera;
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(container.offsetWidth, container.offsetHeight);
     container.appendChild(renderer.domElement);
@@ -198,60 +207,6 @@ export default function ModelView() {
       );
       rightWall.rotation.y = Math.PI / 2;
       scene.add(rightWall);
-
-// Doors creation
-const doorWidth = 0.5;
-const doorHeight = 1;
-const doorThickness = 0.01;
-
-const doorConfigurations = {
-  Hallway: {
-    position: new THREE.Vector3(
-      roomDetails.position.x + roomDetails.dimensions.width / 2,
-      doorHeight / 2,
-      roomDetails.position.z + roomDetails.dimensions.depth
-    ),
-    rotation: Math.PI,
-    material: woodDoorMaterial,
-  },
-  
-};
-
-Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
-  const doorConfig = doorConfigurations[roomName];
-
-  if (doorConfig) {
-    createDoor(
-      doorConfig.position,
-      doorWidth,
-      doorHeight,
-      doorThickness,
-      doorConfig.rotation,
-      doorConfig.material
-    );
-  }
-
-});
-
-      const label = createTextSprite(roomName);
-      label.position.set(
-        roomDetails.position.x + roomDetails.dimensions.width / 2,
-        wallHeight + 1,
-        roomDetails.position.z + roomDetails.dimensions.depth / 2
-      );
-      scene.add(label);
-
-      function createDoor(position, width, height, thickness, rotation, material) {
-        const doorGeometry = new THREE.BoxGeometry(width, height, thickness);
-      
-        position.x += Math.cos(rotation) * (thickness / 2);
-        position.z += Math.sin(rotation) * (thickness / 2);
-      
-        const door = new THREE.Mesh(doorGeometry, material);
-        door.position.copy(position);
-        door.rotation.y = rotation;
-        scene.add(door);
-      }
       
      
     });
@@ -264,6 +219,8 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
 
     animate();
 
+ 
+
     const handleResize = () => {
       camera.aspect = container.offsetWidth / container.offsetHeight;
       camera.updateProjectionMatrix();
@@ -272,14 +229,165 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
 
     window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  
+  };
+
+    
   }, [roomData]);
 
+  
+ useEffect(() => {
+  const container = containerRef.current;
 
-  const handleDragStart = (e, model) => {
-    e.dataTransfer.setData("application/my-app", model.destinationPath);
-    e.dataTransfer.effectAllowed = "move";
+  const onSceneClick = (event) => {
+    // Calculate mouse position in normalized device coordinates (-1 to +1) for both axes
+    mouse.current.x = (event.clientX / container.clientWidth) * 2 - 1;
+    mouse.current.y = -(event.clientY / container.clientHeight) * 2 + 1;
+
+    raycasterRef.current.setFromCamera(mouse.current, cameraRef.current);
+    const intersects = raycasterRef.current.intersectObjects(scene.children, true);
+
+    if (intersects.length > 0) {
+      const intersect = intersects[0].object;
+
+      if (event.shiftKey && selectedObject) {
+       
+        loadModelIntoScene(selectedObject, intersects[0].point);
+      } else {
+        
+        const model = intersects.find(intersect => intersect.object.isModel === true);
+        if (model) {
+          setSelectedObject(model.object);
+          document.documentElement.style.cursor = 'grabbing'; // Update cursor immediately on click
+        }
+      }
+    }
   };
+
+  container.addEventListener('click', onSceneClick);
+
+  return () => {
+    container.removeEventListener('click', onSceneClick);
+  };
+}, [selectedObject]); 
+
+
+useEffect(() => {
+  const handleKeyDown = (event) => {
+    // Ensure there's a selected object to manipulate
+    if (!selectedObject) return;
+
+    // Add 'PageUp' and 'PageDown' to the array of keys that prevent default actions
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', '+', '=', 'PageUp', 'PageDown'].includes(event.key)) {
+      event.preventDefault();
+    }
+
+    let moveDistance = 0.09; // Movement distance
+
+    switch (event.key) {
+      case '+':
+      case '=': // Scale up
+        selectedObject.scale.x += 0.1;
+        selectedObject.scale.y += 0.1;
+        selectedObject.scale.z += 0.1;
+        break;
+      case '-': // Scale down
+        selectedObject.scale.x -= 0.1;
+        selectedObject.scale.y -= 0.1;
+        selectedObject.scale.z -= 0.1;
+        break;
+      case 'ArrowUp': // Move forward
+        selectedObject.position.z -= moveDistance;
+        break;
+      case 'ArrowDown': // Move backward
+        selectedObject.position.z += moveDistance;
+        break;
+      case 'ArrowLeft': // Move left
+        selectedObject.position.x -= moveDistance;
+        break;
+      case 'ArrowRight': // Move right
+        selectedObject.position.x += moveDistance;
+        break;
+      case 'PageUp': // Move up
+        selectedObject.position.y += moveDistance;
+        break;
+      case 'PageDown': // Move down
+        selectedObject.position.y -= moveDistance;
+        break;
+    }
+  };
+
+  window.addEventListener('keydown', handleKeyDown);
+
+  return () => {
+    window.removeEventListener('keydown', handleKeyDown);
+  };
+}, [selectedObject]); // This effect depends on selectedObject
+
+
+useEffect(() => {
+  // Key down and key up handlers to toggle rotation mode
+  const handleKeyDown = (event) => {
+    if (event.key === 'r' || event.key === 'R') {
+      setIsRotating(true);
+    }
+  };
+
+  const handleKeyUp = (event) => {
+    if (event.key === 'r' || event.key === 'R') {
+      setIsRotating(false);
+    }
+  };
+
+  window.addEventListener('keydown', handleKeyDown);
+  window.addEventListener('keyup', handleKeyUp);
+
+  return () => {
+    window.removeEventListener('keydown', handleKeyDown);
+    window.removeEventListener('keyup', handleKeyUp);
+  };
+}, []);
+
+useEffect(() => {
+  let lastX;
+
+  const handleMouseMove = (event) => {
+    if (!isRotating || !selectedObject) return;
+
+    if (lastX !== undefined) {
+      // Calculate mouse movement
+      const deltaX = event.clientX - lastX;
+
+      // Rotation speed factor
+      const rotationSpeed = 0.01;
+
+      // Apply rotation around the Y axis
+      selectedObject.rotation.y += deltaX * rotationSpeed;
+    }
+
+    // Update lastX for the next movement event
+    lastX = event.clientX;
+  };
+
+  if (isRotating) {
+    window.addEventListener('mousemove', handleMouseMove);
+  } else {
+    window.removeEventListener('mousemove', handleMouseMove);
+    lastX = undefined; // Reset lastX when not rotating
+  }
+
+  return () => {
+    window.removeEventListener('mousemove', handleMouseMove);
+  };
+}, [isRotating, selectedObject]);
+
+
+
+
+  
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -290,25 +398,18 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
   };
 
 
-  const loadModelIntoScene = (path) => {
+  const loadModelIntoScene = (path, position)=> {
     const loader = new GLTFLoader();
     const modelPath = `http://localhost:3001/${path.replace(/\\/g, '/')}`;
   
     console.log(`Loading model from: ${modelPath}`);
     
-    loader.load(
-      modelPath,
-      (gltf) => {
-        // Assuming the floor is at y=0
-        const box = new THREE.Box3().setFromObject(gltf.scene);
-        const height = box.max.y - box.min.y;
-        const floorPositionY = 0; // Change this if your floor is not at y=0
-  
-        // Adjust model properties here
-        gltf.scene.scale.set(1, 1, 1); // Adjust scale as needed
-        gltf.scene.position.set(0, floorPositionY - box.min.y, 0); // Adjust position so model sits on the floor
-        scene.add(gltf.scene);
+    loader.load(modelPath, (gltf) => {
+      gltf.scene.position.set(position.x, position.y, position.z); // Set the model's position
+      scene.add(gltf.scene);
+        setSelectedObject(gltf.scene);
         console.log("Model added to the scene:", gltf.scene);
+       
       },
       undefined, // Progress callback (optional)
       (error) => {
@@ -317,8 +418,13 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
         addCubeToScene();
       }
     );
+    document.documentElement.style.cursor = '';
   };
   
+  const handleModelClick = (model) => {
+    setSelectedObject(model.destinationPath); 
+  document.documentElement.style.cursor = 'grabbing';
+  };
   
   const addCubeToScene = () => {
     console.log("Attempting to add a cube to the scene"); // Debugging
@@ -355,11 +461,11 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
           {models.map((model, index) => (
             <div
               key={index}
-             draggable="true"
-             onDragStart={(e) => handleDragStart(e, model)}
+             onClick={() => handleModelClick(model)}
              className="model-item"
            >
-             {model.filename}
+             <img src={`http://localhost:3001/${model.image}`} height={100} width={100} alt=""/>
+       
            </div>
          ))}
       </div>
@@ -367,14 +473,10 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
 
     </div>
 
-   
  
 </div>
 
     </>
   );
 
-
-
-  
 };
