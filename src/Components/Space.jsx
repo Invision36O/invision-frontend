@@ -207,60 +207,6 @@ export default function ModelView() {
       );
       rightWall.rotation.y = Math.PI / 2;
       scene.add(rightWall);
-
-// Doors creation
-const doorWidth = 0.5;
-const doorHeight = 1;
-const doorThickness = 0.01;
-
-const doorConfigurations = {
-  Hallway: {
-    position: new THREE.Vector3(
-      roomDetails.position.x + roomDetails.dimensions.width / 2,
-      doorHeight / 2,
-      roomDetails.position.z + roomDetails.dimensions.depth
-    ),
-    rotation: Math.PI,
-    material: woodDoorMaterial,
-  },
-  
-};
-
-Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
-  const doorConfig = doorConfigurations[roomName];
-
-  if (doorConfig) {
-    createDoor(
-      doorConfig.position,
-      doorWidth,
-      doorHeight,
-      doorThickness,
-      doorConfig.rotation,
-      doorConfig.material
-    );
-  }
-
-});
-
-      const label = createTextSprite(roomName);
-      label.position.set(
-        roomDetails.position.x + roomDetails.dimensions.width / 2,
-        wallHeight + 1,
-        roomDetails.position.z + roomDetails.dimensions.depth / 2
-      );
-      scene.add(label);
-
-      function createDoor(position, width, height, thickness, rotation, material) {
-        const doorGeometry = new THREE.BoxGeometry(width, height, thickness);
-      
-        position.x += Math.cos(rotation) * (thickness / 2);
-        position.z += Math.sin(rotation) * (thickness / 2);
-      
-        const door = new THREE.Mesh(doorGeometry, material);
-        door.position.copy(position);
-        door.rotation.y = rotation;
-        scene.add(door);
-      }
       
      
     });
@@ -282,13 +228,11 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
     };
 
     window.addEventListener('resize', handleResize);
-    // window.addEventListener('mousemove', onDocumentMouseMove, false);
-    // window.addEventListener('mouseup', onDocumentMouseUp, false);
+
 
   return () => {
     window.removeEventListener('resize', handleResize);
-    // window.removeEventListener('mousemove', onDocumentMouseMove);
-    // window.removeEventListener('mouseup', onDocumentMouseUp);
+  
   };
 
     
@@ -310,12 +254,10 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
       const intersect = intersects[0].object;
 
       if (event.shiftKey && selectedObject) {
-        // Place the selected model at the intersection point
-        // Ensure this places the model correctly based on your scene's setup
+       
         loadModelIntoScene(selectedObject, intersects[0].point);
       } else {
-        // Check if the clicked object is a model in the scene
-        // For better control, you might want to add and check a custom property to distinguish between models and other objects
+        
         const model = intersects.find(intersect => intersect.object.isModel === true);
         if (model) {
           setSelectedObject(model.object);
@@ -330,16 +272,8 @@ Object.entries(roomData.rooms).forEach(([roomName, roomDetails]) => {
   return () => {
     container.removeEventListener('click', onSceneClick);
   };
-}, [selectedObject]); // Depend on selectedObject to handle model placement and selection
+}, [selectedObject]); 
 
-// // Add this useEffect for handling cursor style changes when a model is selected
-// useEffect(() => {
-//   if (selectedObject) {
-//     document.documentElement.style.cursor = 'grabbing';
-//   } else {
-//     document.documentElement.style.cursor = 'default';
-//   }
-// }, [selectedObject]);
 
 useEffect(() => {
   const handleKeyDown = (event) => {
@@ -351,7 +285,7 @@ useEffect(() => {
       event.preventDefault();
     }
 
-    let moveDistance = 0.1; // Movement distance
+    let moveDistance = 0.09; // Movement distance
 
     switch (event.key) {
       case '+':
@@ -488,8 +422,7 @@ useEffect(() => {
   };
   
   const handleModelClick = (model) => {
-    setSelectedObject(model.destinationPath); // Assume destinationPath is the path to the model
-     // Change the cursor style for the .container element or the entire document
+    setSelectedObject(model.destinationPath); 
   document.documentElement.style.cursor = 'grabbing';
   };
   
@@ -531,7 +464,8 @@ useEffect(() => {
              onClick={() => handleModelClick(model)}
              className="model-item"
            >
-             {model.filename}
+             <img src={`http://localhost:3001/${model.image}`} height={100} width={100} alt=""/>
+       
            </div>
          ))}
       </div>
@@ -539,7 +473,6 @@ useEffect(() => {
 
     </div>
 
-   
  
 </div>
 
