@@ -15,6 +15,8 @@ import {Home} from './Components/Home'
 import Navbar from './Layouts/Navbar';
 import DisplayMap from './Components/DisplayMap'
 import UploadMap from './Components/UploadMap';
+import UploadImages from './Components/UploadImages';
+import Photo from './Components/Photo';
 
 
 function App() {
@@ -50,6 +52,8 @@ function App() {
           <Route path="/space" element = {<Space/>}/>
           <Route path="/object" element = {<ModelView/>}/>
           <Route path="/home" element = {<Home/>}/>
+          <Route path="/uploadPhoto" element = {<UploadImages/>}/>
+          <Route path="/photo" element = {<Photo/>}/>
         </Routes>
       </BrowserRouter>
       <Footer/>

@@ -1,0 +1,48 @@
+.photo h2{
+    padding-top: 100px;
+    font-weight: 500;
+}
+
+.photo h3{
+    font-weight: 100;
+}
+
+.photo{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loading-bar {
+    width: 25%;
+    height: 8px;
+    position: relative;
+    margin: 10px auto;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+  }
+  
+  .loading-bar::before {
+    content: '';
+    display: block;
+    width: 200%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(to right, #74006b, rgb(234.6, 77.03, 222.75), #74006b);
+    animation: color-change 2s infinite;
+  }
+  
+  @keyframes color-change {
+    0% {
+      left: -100%;
+    }
+    50% {
+      left: 0%;
+    }
+    100% {
+      left: -100%;
+    }
+  }

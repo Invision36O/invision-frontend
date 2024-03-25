@@ -170,16 +170,18 @@ export default function ModelView() {
     <div className="modelview">
     <div className='color'>
     <div className='buttons'>
-<input type="file" accept=".gltf,.glb" style={{ display: 'none' }} onChange={handleImageChange} id="modelFileInput" />
-<button className="import-btn" onClick={() => document.getElementById('modelFileInput').click()}>Upload Model</button>
+      <input type="file" accept=".gltf,.glb" style={{ display: 'none' }} onChange={handleImageChange} id="modelFileInput" />
+      <button className="import-btn" onClick={() => document.getElementById('modelFileInput').click()}>Upload Model</button>
 
-<input type="file" accept=".zip" style={{ display: 'none' }} onChange={uploadFolder} id="folderFileInput" />
-<button className="import-btn" onClick={() => document.getElementById('folderFileInput').click()}>Upload Folder</button>
-</div>
+      <input type="file" accept=".zip" style={{ display: 'none' }} onChange={uploadFolder} id="folderFileInput" />
+      <button className="import-btn" onClick={() => document.getElementById('folderFileInput').click()}>Upload Folder</button>
+    </div>
+    <a href="/uploadPhoto"><button className="import-btn">Make Your Own Model</button></a>
 
-<div className='container' ref={containerRef} style={{minHeight:'200',minWidth:'300',width: '800px',height: '620px'}}/>
+    <div className='container' ref={containerRef} style={{minHeight:'200',minWidth:'300',width: '800px',height: '620px'}}/>
     </div>
     </div>
+    
     </>
   );
 }

@@ -141,7 +141,7 @@ export const Home = () => {
         </div>
 
         <div className="card">
-          <a href="/object" className="card"><div className="card-image"><img src="/Icons/card/GenerateModel.png" alt="" height={150}width={150}/></div>
+          <a href="/photo" className="card"><div className="card-image"><img src="/Icons/card/GenerateModel.png" alt="" height={150}width={150}/></div>
           <div className="heading">
             <h3>Generate 3D Model</h3>
           </div>
