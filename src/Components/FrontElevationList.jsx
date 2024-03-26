@@ -1,61 +1,64 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import './FrontElevationList.css';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
-import './FrontElevationList.css'; // Add your CSS file path here
 
 const FrontElevationList = () => {
-  const [elevations, setElevations] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-
+  const [models, setModels] = useState([]);
   const location = useLocation();
-  const { selectedStyle, selectedColor } = location.state || {};
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    if (selectedStyle && selectedColor) {
-      setIsLoading(true);
-      axios.get(`/api/front-elevations/filter`, {
-        params: { style: selectedStyle, colorScheme: selectedColor }
-      })
-      .then(response => {
-        setElevations(response.data);
-      })
-      .catch(error => {
-        console.error("Error fetching front elevations:", error);
-        setError('Failed to fetch elevations. Please try again later.');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-    }
-  }, [selectedStyle, selectedColor]);
+    const fetchModels = async () => {
+      const { selectedStyle, selectedColor } = location.state || {};
+      if (!selectedStyle || !selectedColor) {
+        navigate('/'); // Redirect to home or selection page
+        return;
+      }
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+      try {
+        const response = await axios.get(`http://localhost:3001/frontelevation/filterElevations`, {
+          params: { style: selectedStyle, colorScheme: selectedColor },
+        });
+        setModels(response.data);
+      } catch (error) {
+        console.error("Error fetching models:", error);
+      }
+    };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+    fetchModels();
+  }, [location.state, navigate]);
+
+  const handleModelSelect = (model) => {
+    navigate('/customizeElevation', { state:  { modelData: model }});
+  };
 
   return (
     <div className="front-elevation-list-container">
-      <h1>Available Front Elevations</h1>
-      <div className="elevations-container">
-        {elevations.length > 0 ? (
-          elevations.map((elevation) => (
-            <div key={elevation._id} className="elevation-card">
-              <img src={elevation.modelUrl} alt={elevation.name} className="elevation-image" />
-              <div className="elevation-details">
-                <h3>{elevation.name}</h3>
-                <p>Style: {elevation.style}</p>
-                <p>Color: {elevation.colorScheme}</p>
+      <h2 className="front-elevation-list-title">Available Front Elevations</h2>
+      <div className="model-list">
+        {models.map((model, index) => (
+          <div key={index} className="model-item-container">
+            <div className="model-info">
+              {model.imagePath && (
+                <img 
+                  src={`http://localhost:3001/${model.imagePath}`} 
+                  alt={model.name} 
+                  className="model-image"
+                />
+              )}
+              <div className="model-text">
+                <p className="model-name">Name: {model.name}</p>
+                <p className="model-style">Style: {model.style}</p>
+                <p className="model-color">Color: {model.colorScheme}</p>
               </div>
             </div>
-          ))
-        ) : (
-          <p>No front elevations match your criteria.</p>
-        )}
+            <button className="customize-button" onClick={() => handleModelSelect(model)}>
+              Customize
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as THREE from 'three';
+import { useLocation } from 'react-router-dom';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import './CustomizeElevation.css';
@@ -7,15 +8,21 @@ import Navbar from '../Layouts/Navbar';
 import axios from 'axios';
 
 export default function CustomizeElevation() {
-  const folderPath = 'http://localhost:3001/modeluploads/modern_home_elevation_2';
+  ;;
   const containerRef = useRef(null);
   const sceneRef = useRef(null);
   const cameraRef = useRef(null);
   const rendererRef = useRef(null);
   const selectedObjectRef = useRef(null);
   const [objects, setObjects] = useState([]);
+  const { state } = useLocation();
+  const modelData = state?.modelData; 
+  const serverUrl = 'http://localhost:3001';// This is the path you pass from the FrontElevationList component
+ 
+  console.log(modelData)
 
   useEffect(() => {
+
     const fetchObjects = async () => {
       try {
         const response = await axios.get('http://localhost:3001/objects3D/objects');
@@ -44,9 +51,13 @@ export default function CustomizeElevation() {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(1, 1, 1);
     sceneRef.current.add(directionalLight);
-
+  
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load(`${folderPath}/model.gltf`, (gltfScene) => {
+    const modelPath =modelData?.modelPath;
+    const path=serverUrl+'/'+modelPath;
+    console.log(path);
+   // modelData.modelPath;
+    gltfLoader.load(`${serverUrl}/${modelPath}`, (gltfScene) => {
       sceneRef.current.add(gltfScene.scene);
     }, undefined, error => {
       console.error('An error happened', error);
@@ -145,7 +156,7 @@ export default function CustomizeElevation() {
         containerRef.current.removeChild(rendererRef.current.domElement);
       }
     };
-  }, []);
+  }, [modelData]);
 
   const handleDragStart = (e, model) => {
     e.dataTransfer.setData("application/my-app", model.destinationPath);
@@ -176,7 +187,7 @@ export default function CustomizeElevation() {
     const modelPath = `http://localhost:3001/${path.replace(/\\/g, '/')}`;
 
     loader.load(
-      modelPath,
+      `${basePath}${modelPath}`,
       (gltf) => {
         const boundingBox = new THREE.Box3().setFromObject(gltf.scene);
         const size = boundingBox.getSize(new THREE.Vector3());
@@ -184,7 +195,15 @@ export default function CustomizeElevation() {
         const scale = 1.0 / maxDimension;
         gltf.scene.scale.set(scale, scale, scale);
         gltf.scene.position.copy(position);
+        gltf.scene.userData.modelId = gltf.scene.uuid;
+      gltf.scene.traverse(child => {
+        if (child.isMesh) {
+          child.userData.isSelectable = true;
+        }
+      });
+      console.log(gltf.scene.userData)
         sceneRef.current.add(gltf.scene);
+        
         selectedObjectRef.current = gltf.scene; // Keep reference to the current object
 
         rendererRef.current.render(sceneRef.current, cameraRef.current); // Render the scene
@@ -196,7 +215,38 @@ export default function CustomizeElevation() {
     );
   };
 
+  useEffect(() => {
+    const container = containerRef.current;
+    const onSceneClick = (event) => {
+      // Convert click position to normalized device coordinates
+      mouse.current.x = (event.clientX / container.clientWidth) * 2 - 1;
+      mouse.current.y = -(event.clientY / container.clientHeight) * 2 + 1;
+    
+      // Update raycaster
+      raycasterRef.current.setFromCamera(mouse.current, cameraRef.current);
+    
+      // Attempt to intersect selectable objects
+      const intersects = raycasterRef.current.intersectObjects(scene.children, true);
+    
+      const selected = intersects.find(intersect => intersect.object.userData.isSelectable);
+    
+      if (selected) {
+        // Here, 'selected' is your intersected model
+        const model = selected.object;
+        selectedObjectRef.current = model;
+        console.log(model)
+      } else {
+        selectedObjectRef.current = null;
+        console.log("didnot find anything")
+      }
+    };
   
+    container.addEventListener('click', onSceneClick);
+  
+    return () => {
+      container.removeEventListener('click', onSceneClick);
+    };
+  }, [sceneRef.scene, selectedObjectRef]);
 
   const handleKeyDown = (event) => {
     if (!selectedObjectRef.current) return;
@@ -261,35 +311,39 @@ export default function CustomizeElevation() {
     }
     rendererRef.current.render(sceneRef.current, cameraRef.current); // Re-render the scene after moving the object
   };
-
   return (
-    <div className='Navbar'>
-      <Navbar />
-      <div className="customize-elevation">
-        <div
-          ref={containerRef}
-          className="model-container"
-          onDrop={handleDrop}
-          onDragOver={(e) => e.preventDefault()}
-          style={{ width: '70%', height: '500px', cursor: 'pointer' }}
-        >
-        </div>
-        <aside className="sidebar" style={{ width: '30%', overflowY: 'auto' }}>
+  <div className='customize-elevation-app'>
+    {/* <Navbar /> */}
+    <div className="customize-elevation">
+      <div
+        ref={containerRef}
+        className="model-container"
+        onDrop={handleDrop}
+        onDragOver={(e) => e.preventDefault()}
+      >
+        {/* Your 3D model container */}
+      </div>
+      <aside className="sidebar">
+        <div className="catalogue-container">
           <h3>Catalogue</h3>
-          <ul>
+          <div className="catalogue-grid">
             {objects.map((object, index) => (
-              <li
+              <div
                 key={index}
                 draggable="true"
                 onDragStart={(e) => handleDragStart(e, object)}
-                style={{ cursor: 'grab', padding: '10px', border: '1px solid #ccc', marginBottom: '5px' }}
+                className="catalogue-item"
               >
-                {object.name}
-              </li>
+                <img src={`http://localhost:3001/${object.imagepath}`} alt={object.name} />
+                <div className="catalogue-item-title">{object.name}</div>
+              </div>
             ))}
-          </ul>
-        </aside>
-      </div>
+          </div>
+        </div>
+      </aside>
     </div>
-  );
+  </div>
+);
+
+  
 }

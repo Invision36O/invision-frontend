@@ -24,21 +24,44 @@ const FrontElevationSelector = () => {
   };
 
   useEffect(() => {
-    // Fetch styles and colors from the backend
+    let isMounted = true; // Track if the component is still mounted
+  
     const fetchStylesAndColors = async () => {
       try {
-        // Replace with your actual API endpoints
-        const stylesResponse = await axios.get('/frontelevation/styles');
-        const colorsResponse = await axios.get('/frontelevation/colors');
-        setStyles(stylesResponse.data);
-        setColors(colorsResponse.data);
+        const stylesResponse = await axios.get('http://localhost:3001/frontelevation/styles');
+        const colorsResponse = await axios.get('http://localhost:3001/frontelevation/colors');
+  
+        // Directly access 'styles' property for styles
+        if (isMounted && stylesResponse.data && Array.isArray(stylesResponse.data.styles)) {
+          setStyles(stylesResponse.data.styles);
+        } else {
+          console.error("Styles data is not in the expected format", stylesResponse.data);
+          setStyles([]); // Fallback to empty array
+        }
+  
+        // Directly use the response data for colors as it's already an array
+        if (isMounted && colorsResponse.data && Array.isArray(colorsResponse.data)) {
+          setColors(colorsResponse.data);
+        } else {
+          console.error("Colors data is not in the expected format", colorsResponse.data);
+          setColors([]); // Fallback to empty array
+        }
       } catch (error) {
         console.error("Error fetching data", error);
+        if (isMounted) {
+          setStyles([]);
+          setColors([]);
+        }
       }
     };
-
+  
     fetchStylesAndColors();
+  
+    return () => {
+      isMounted = false; // Cleanup function to avoid updating state after unmount
+    };
   }, []);
+  
 
 
   return (
