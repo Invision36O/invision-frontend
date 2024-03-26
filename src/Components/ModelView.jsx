@@ -71,6 +71,73 @@ export default function ModelView() {
   }
 };
 
+import axios from 'axios';
+import Navbar from '../Layouts/Navbar';
+export default function ModelView() {
+
+  const [modelURL, setModelURL] = useState(null);
+  const handleImageChange = async (event) => {
+    console.log("Upload File")
+    const files = event.target.files;
+  
+    if (files.length > 0) {
+      const formData = new FormData();
+  
+      for (let i = 0; i < files.length; i++) {
+        formData.append('file', files[i]);
+      }
+  
+      try {
+        const response = await axios.post('http://localhost:3001/model/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+  
+        if (response.status === 200) {
+          const modelURL = response.data.subfolderpath;
+          setModelURL(modelURL);
+          console.log(modelURL)
+        } else {
+          console.error('Model upload failed:', response.data.error);
+        }
+      } catch (error) {
+        console.error('Error uploading Model:', error);
+      }
+    }
+ };
+  
+ const uploadFolder = async (event) => {
+  console.log("Upload Folder")
+  const files = event.target.files;
+
+  if (files.length > 0) {
+    const formData = new FormData();
+
+    for (let i = 0; i < files.length; i++) {
+      formData.append('file', files[i]);
+    }
+
+    try {
+      const response = await axios.post('http://localhost:3001/model/uploadzip', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.status === 200) {
+        const modelURL = `uploads/` + response.data.files;
+        setModelURL(modelURL);
+        console.log(modelURL)
+      } else {
+        console.error('Model upload failed:', response.data.error);
+      }
+    } catch (error) {
+      console.error('Error uploading Model:', error);
+    }
+  }
+};
+
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -168,18 +235,7 @@ export default function ModelView() {
   return (
     <>
     <div className="modelview">
-    <div className='color'>
-    <div className='buttons'>
-<input type="file" accept=".gltf,.glb" style={{ display: 'none' }} onChange={handleImageChange} id="modelFileInput" />
-<button className="import-btn" onClick={() => document.getElementById('modelFileInput').click()}>Upload Model</button>
-
-<input type="file" accept=".zip" style={{ display: 'none' }} onChange={uploadFolder} id="folderFileInput" />
-<button className="import-btn" onClick={() => document.getElementById('folderFileInput').click()}>Upload Folder</button>
-</div>
-
-<div className='container' ref={containerRef} style={{minHeight:'200',minWidth:'300',width: '800px',height: '620px'}}/>
+      <div className="container" ref={containerRef} style={{ minHeight: '200px', minWidth: '300px', width: '800px', height: '620px' }} />
     </div>
-    </div>
-    </>
   );
 }

@@ -58,7 +58,8 @@ h1{
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: #888;
+  background-color: #831195ac;
+  border-radius: 3px;
 }
 
 /* Handle on hover */
